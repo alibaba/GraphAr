@@ -1,0 +1,483 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta property="og:title" content="Getting Started" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="user-guide/getting-started.html" />
+<meta property="og:site_name" content="GraphAr" />
+<meta property="og:description" content="This article is a quick guide that explains how to work with GraphAr. To begin with, please refer to the Building Steps to install GraphAr. After reading this article to gain a basic understanding ..." />
+<meta name="description" content="This article is a quick guide that explains how to work with GraphAr. To begin with, please refer to the Building Steps to install GraphAr. After reading this article to gain a basic understanding ..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="GraphAr File Format" href="file-format.html" /><link rel="prev" title="Overview" href="overview.html" />
+
+    <!-- Generated with Sphinx 6.1.2 and Furo 2022.12.07 -->
+        <title>Getting Started - GraphAr</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/brands.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/v4-shims.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/panels.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+  <script>
+    document.body.dataset.theme = "light";
+  </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GraphAr</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">GraphAr</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file-format.html">GraphAr File Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spark-lib.html">GraphAr Spark Library</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Application Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../applications/out-of-core.html">Out-of-core Graph Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/bgl.html">Co-Work with BGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/graphscope.html">Integrate into GraphScope</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contribution Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to GraphAr</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/api-reference-cpp.html">C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/spark-api/index.html">Spark API Reference</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/alibaba/GraphAr/edit/main/docs/user-guide/getting-started.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h1>
+<p>This article is a quick guide that explains how to work with GraphAr. To begin with, please refer to the <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/README.rst">Building Steps</a> to install GraphAr. After reading this article to gain a basic understanding of GraphAr, move on to <a class="reference external" href="file-format.html">GraphAr File Format</a> to explore more specific explanations of the file format, or <a class="reference external" href="../reference/api-reference-cpp.html">the C++ library</a> and <a class="reference external" href="spark-lib.html">the Spark library</a>  to learn about the GraphAr libraries.</p>
+<section id="gar-information-files">
+<h2>GAR Information Files<a class="headerlink" href="#gar-information-files" title="Permalink to this heading">#</a></h2>
+<p>GAR uses a group of Yaml files to save the meta information for a graph.</p>
+<section id="graph-information">
+<h3>Graph information<a class="headerlink" href="#graph-information" title="Permalink to this heading">#</a></h3>
+<p>The graph information file defines the most basic information of a graph includes its name, the root directory path of the data files, the vertex information and edge information files it contains, and the version of GraphAr. For example, the file “ldbc_sample.graph.yml” defines an example graph named “ldbc_sample”, which includes one type of vertices (“person”) and one type of edges (“person knows person”).</p>
+<div class="highlight-Yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ldbc_sample</span>
+<span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./</span>
+<span class="nt">vertices</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">person.vertex.yml</span>
+<span class="nt">edges</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">person_knows_person.edge.yml</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</section>
+<section id="vertex-information">
+<h3>Vertex information<a class="headerlink" href="#vertex-information" title="Permalink to this heading">#</a></h3>
+<p>Each vertex information file defines a single group of vertices with the same vertex label, e.g., “person” in this case. The vertex chunk size, the relative path for vertex data files and the version of GraphAr are specified. These vertices could have some properties, which are divided into property groups. Each property group has its own file type (CSV, ORC or Parquet) and the prefix of the relative path for its data files, it also lists all properties in this group, with every property contains the name, data type and if it is the primary key.</p>
+<p>The file <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/ldbc_sample/csv/person.vertex.yml">person.vertex.yml</a> located inside the test data contains an example of the vertex information file. In this example, the “person” vertices have two property groups. The first group contains only one property (named “id”) and the second group contains three properties (“firstName”, “lastName” and “gender”).</p>
+</section>
+<section id="edge-information">
+<h3>Edge information<a class="headerlink" href="#edge-information" title="Permalink to this heading">#</a></h3>
+<p>Each edge information file defines a single type of edges with specific labels for the source vertex, destination vertex and the edge, e.g., “person_konws_person” in this case. It defines the meta information such as the edge chunk size, the source vertex chunk size, the destination vertex chunk size, if the edges are directed or not, the relative file path for edge data files, the adjLists and the version of GraphAr. The file <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/ldbc_sample/csv/person_knows_person.edge.yml">person_knows_person.edge.yml</a> located inside the test data contains an example of the edge information file.</p>
+<p>In GAR format, separate data files are used to store the structure (called adjList) and the properties for edges. The adjList type can be either of <strong>unordered_by_source</strong>, <strong>unordered_by_dest</strong>, <strong>ordered_by_source</strong> or <strong>ordered_by_dest</strong> (see <a class="reference external" href="file-format.html#edges-in-graphar">Edges in GraphAr</a> for more). For a specific type of adjList, the meta information includes its file path prefix, the file type, as well as all the property groups attached.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is allowed to store different types of adjLists for a group of edges at the same time.</p>
+</div>
+</section>
+</section>
+<section id="gar-data-files">
+<h2>GAR Data Files<a class="headerlink" href="#gar-data-files" title="Permalink to this heading">#</a></h2>
+<section id="property-data">
+<h3>Property data<a class="headerlink" href="#property-data" title="Permalink to this heading">#</a></h3>
+<p>The vertex properties are stored in vertex property chunks with the chunk size specified by the vertex information file. Different property groups correspond to individual groups of data files.
+In our example, the property group (“first name”, “last name”, “gender”) for vertex chunk 0 of “person” vertices are stored in <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/ldbc_sample/csv/vertex/person/firstName_lastName_gender/chunk0">./vertex/person/firstName_lastName_gender/chunk0</a>.</p>
+<p>In practice of graph processing, it is common to only query a subset of columns of the properties. Thus, the column-oriented formats like Apache ORC and Apache Parquet are more efficient, which eliminate the need to read columns that are not relevant. We also provide data files in ORC and Parquet for the example graph in the <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/ldbc_sample/">test data</a>.</p>
+<p>Similar with vertices, the edge properties are stored in edge property chunks. For each vertex chunk, its associated edges (if the edge type is <strong>ordered_by_source</strong> or <strong>unordered_by_source</strong>, the associated edges are those in which the source vertex is in that chunk; otherwise, if the edge type is <strong>ordered_by_dest</strong> or <strong>unordered_by_dest</strong>, the associated edges are those in which the destination is in that chunk) are maintained in some edge chunks, with the size of each chunk not exceeding the edge chunk size specified in the edge information file.</p>
+<p>For instance, the file <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/ldbc_sample/csv/edge/person_knows_person/ordered_by_source/creationDate/part0/chunk0">./edge/person_knows_person/ordered_by_source/creationDate/part0/chunk0</a> stores the property group “creationDate” of “person_knows_person” edges for the first edge chunk of the first vertex chunk, and the adjList type of the edges is <strong>ordered_by_source</strong>.</p>
+</section>
+<section id="adjlist-data">
+<h3>AdjList data<a class="headerlink" href="#adjlist-data" title="Permalink to this heading">#</a></h3>
+<p>The adjList in GAR describes the topology structure, i.e., the source vertex id and the destination vertex id for each of a group of edges. As explained in <a class="reference external" href="file-format.html#edges-in-graphar">Edges in GraphAr</a>, the edges are separated into edge chunks, and each edge chunk has its own adjList table and 0 or more property tables.</p>
+<p>For example, the file <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/ldbc_sample/csv/edge/person_knows_person/ordered_by_source/adj_list/part0/chunk0">./edge/person_knows_person/ordered_by_source/adj_list/part0/chunk0</a> saves the adjList of “person_knows_person” edges for the first edge chunk of the first vertex chunk, and the adjList type of the edges is “ordered_by_source”. This adjList table consists of only two columns: one for the source and one for the destination; it can be saved in CSV, ORC, or Parquet files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the edges are ordered, there may also be offset chunks to construct the index for accessing edges of a single vertex. These chunks will store the start offset of each vertex’s edges, see <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/ldbc_sample/csv/edge/person_knows_person/ordered_by_source/offset/chunk0">./edge/person_knows_person/ordered_by_source/offset/chunk0</a> as an example.</p>
+</div>
+</section>
+</section>
+<section id="how-to-use-gar">
+<h2>How to Use GAR<a class="headerlink" href="#how-to-use-gar" title="Permalink to this heading">#</a></h2>
+<section id="construct-information">
+<h3>Construct information<a class="headerlink" href="#construct-information" title="Permalink to this heading">#</a></h3>
+<p>It is convenient to construct the GAR metadata and dump it to generate information files. We provide an <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/examples/construct_info_example.cc">example program</a> located in the source code which shows how to construct and dump the files for graph information, vertex information and edge information.</p>
+<p>Also, the metadata of a graph can be constructed easily through reading the already existed information files, as the following code illustrates:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct graph information from file</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="c1">// the path of the graph information file (e.g., ldbc_sample.graph.yml)</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">graph_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GraphArchive</span><span class="o">::</span><span class="n">GraphInfo</span><span class="o">::</span><span class="n">Load</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">value</span><span class="p">();</span>
+
+<span class="c1">// get vertex information</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">maybe_vertex_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph_info</span><span class="p">.</span><span class="n">GetVertexInfo</span><span class="p">(</span><span class="s">&quot;person&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">maybe_vertex_info</span><span class="p">.</span><span class="n">status</span><span class="p">().</span><span class="n">ok</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">vertex_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maybe_vertex_info</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// use vertex_info ...</span>
+<span class="p">}</span>
+
+<span class="c1">// get edge information</span>
+<span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">maybe_edge_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph_info</span><span class="p">.</span><span class="n">GetEdgeInfo</span><span class="p">(</span><span class="s">&quot;person&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;knows&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;person&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">maybe_edge_info</span><span class="p">.</span><span class="n">status</span><span class="p">().</span><span class="n">ok</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">edge_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maybe_vertex_info</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// use edge_info ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="read-gar-files">
+<h3>Read GAR files<a class="headerlink" href="#read-gar-files" title="Permalink to this heading">#</a></h3>
+<p>GAR supports the flexible reading of graph data, e.g., allowing to read data of a single vertex, a vertex chunk, or all vertices with a specific label. In addition, necessary property groups can be selected to read and avoid reading all properties from the files. Furthermore, GAR provides convenient and flexible access to adjList, offset and property chunks for edges.</p>
+<p>As a simple case, the following example shows how to read all vertices with label “person” of the graph defined by “graph_info” and output the values of “id” and “firstName” for each vertex.</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">graph_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vertices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GraphArchive</span><span class="o">::</span><span class="n">ConstructVerticesCollection</span><span class="p">(</span><span class="n">graph_info</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;person&quot;</span><span class="p">).</span><span class="n">value</span><span class="p">();</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertices</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">vertices</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// get a vertex and access its data</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;id=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vertex</span><span class="p">.</span><span class="n">property</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">).</span><span class="n">value</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, firstName=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vertex</span><span class="p">.</span><span class="n">property</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;firstName&quot;</span><span class="p">).</span><span class="n">value</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The next example reads all edges with label “person_knows_person” from the above graph and outputs the end vertices for each edge.</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">graph_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">expect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GraphArchive</span><span class="o">::</span><span class="n">ConstructEdgesCollection</span><span class="p">(</span><span class="n">graph_info</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;person&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;konws&quot;</span><span class="w"> </span><span class="s">&quot;person&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GraphArchive</span><span class="o">::</span><span class="n">AdjListType</span><span class="o">::</span><span class="n">ordered_by_source</span><span class="p">).</span><span class="n">value</span><span class="p">();</span>
+<span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="n">GraphArchive</span><span class="o">::</span><span class="n">EdgesCollection</span><span class="o">&lt;</span><span class="n">GraphArchive</span><span class="o">::</span><span class="n">AdjListType</span><span class="o">::</span><span class="n">ordered_by_source</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">expect</span><span class="p">.</span><span class="n">value</span><span class="p">());</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edges</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">edges</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// get an edge and access its data</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;src=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">edge</span><span class="p">.</span><span class="n">source</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, dst=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">edge</span><span class="p">.</span><span class="n">destination</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See also <a class="reference external" href="../reference/api-reference-cpp.html#readers">C++ Reader API Reference</a>.</p>
+</section>
+<section id="write-gar-files">
+<h3>Write GAR files<a class="headerlink" href="#write-gar-files" title="Permalink to this heading">#</a></h3>
+<p>As same with the readers, the GAR writers provide different-level methods to output the graph data in memory into GAR files.</p>
+<p>As the simplest cases, the fist example below adds vertices to <strong>VerticesBuilder</strong>, and then dumps the data to files; the second example constructs a collection of edges and then dumps them.</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">vertex_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="n">GraphArchive</span><span class="o">::</span><span class="n">builder</span><span class="o">::</span><span class="n">VerticesBuilder</span><span class="w"> </span><span class="n">builder</span><span class="p">(</span><span class="n">vertex_info</span><span class="p">,</span><span class="w">  </span><span class="n">prefix</span><span class="p">);</span>
+
+<span class="c1">// add a vertex</span>
+<span class="n">GraphArchive</span><span class="o">::</span><span class="n">builder</span><span class="o">::</span><span class="n">Vertex</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="n">v</span><span class="p">.</span><span class="n">AddProperty</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">933</span><span class="p">);</span>
+<span class="n">v</span><span class="p">.</span><span class="n">AddProperty</span><span class="p">(</span><span class="s">&quot;firstName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">);</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+<span class="c1">// add other vertices</span>
+<span class="c1">// ...</span>
+
+<span class="c1">// write to GAR files</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Dump</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">edge_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="n">GraphArchive</span><span class="o">::</span><span class="n">builder</span><span class="o">::</span><span class="n">EdgesBuilder</span><span class="w"> </span><span class="n">builder</span><span class="p">(</span><span class="n">edge_info</span><span class="p">,</span><span class="w"> </span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">GraphArchive</span><span class="o">::</span><span class="n">AdjListType</span><span class="o">::</span><span class="n">ordered_by_source</span><span class="p">);</span>
+
+<span class="c1">// add an edge (0 -&gt; 3)</span>
+<span class="n">GraphArchive</span><span class="o">::</span><span class="n">builder</span><span class="o">::</span><span class="n">Edge</span><span class="w"> </span><span class="nf">e</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="n">e</span><span class="p">.</span><span class="n">AddProperty</span><span class="p">(</span><span class="s">&quot;creationDate&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2011-07-20T20:02:04.233+0000&quot;</span><span class="p">);</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="c1">// add other edges</span>
+<span class="c1">// ...</span>
+
+<span class="c1">// write to GAR files</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Dump</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>See also <a class="reference external" href="../reference/api-reference-cpp.html#writer-and-builder">C++ Writer API Reference</a>.</p>
+</section>
+<section id="a-pagerank-example">
+<h3>A PageRank Example<a class="headerlink" href="#a-pagerank-example" title="Permalink to this heading">#</a></h3>
+<p>Here we will go through an example of out-of-core graph analytic algorithms based on GAR which calculates the PageRank. Please look <a class="reference external" href="https://en.wikipedia.org/wiki/PageRank">here</a> if you want a detailed explanation of the PageRank algorithm. And the source code can be found at <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/examples/pagerank_example.cc">pagerank_example.cc</a>.</p>
+<p>This program first reads in the graph information file to obtain the metadata; then, it constructs the vertex and edge collections to enable access to the graph. After that, an implementation of the PageRank algorithm is provided, with data for the vertices stored in memory, and the edges streamed through disk I/O. Finally, the vertex information with type “person” is extended to include a new property named “pagerank” (a new vertex information file named <em>person-new-pagerank.vertex.yml</em> is saved) and the <strong>VerticesBuilder</strong> is used to write the results to new generated data chunks.</p>
+<p>Please refer to <a class="reference external" href="../applications/out-of-core.html">more examples</a> to learn about the other available case studies utilizing GraphAr.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="file-format.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">GraphAr File Format</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="overview.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Overview</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, The GraphAr Authors
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa fa-solid fa-github fa-2x" href="https://github.com/alibaba/GraphAr" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#gar-information-files">GAR Information Files</a><ul>
+<li><a class="reference internal" href="#graph-information">Graph information</a></li>
+<li><a class="reference internal" href="#vertex-information">Vertex information</a></li>
+<li><a class="reference internal" href="#edge-information">Edge information</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gar-data-files">GAR Data Files</a><ul>
+<li><a class="reference internal" href="#property-data">Property data</a></li>
+<li><a class="reference internal" href="#adjlist-data">AdjList data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-use-gar">How to Use GAR</a><ul>
+<li><a class="reference internal" href="#construct-information">Construct information</a></li>
+<li><a class="reference internal" href="#read-gar-files">Read GAR files</a></li>
+<li><a class="reference internal" href="#write-gar-files">Write GAR files</a></li>
+<li><a class="reference internal" href="#a-pagerank-example">A PageRank Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>
