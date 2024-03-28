@@ -1,0 +1,1443 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="Implementation Status" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="format/status.html" />
+<meta property="og:site_name" content="GraphAr" />
+<meta property="og:description" content="The following tables summarize the features available in the various official GraphAr libraries. All libraries currently follow version 1.0.0 of the GraphAr format. Data Types:,,,,, Data type (prim..." />
+<meta name="description" content="The following tables summarize the features available in the various official GraphAr libraries. All libraries currently follow version 1.0.0 of the GraphAr format. Data Types:,,,,, Data type (prim..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="C++ Library" href="../cpp/index.html" /><link rel="prev" title="GraphAr File Format" href="file-format.html" />
+
+    <link rel="shortcut icon" href="../_static/graphar.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+        <title>Implementation Status - GraphAr</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/brands.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/v4-shims.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/panels.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+  <script>
+    document.body.dataset.theme = "light";
+  </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GraphAr</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">GraphAr</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Format Specification</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="file-format.html">File Format</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Implementation Status</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Libraries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cpp/index.html">C++</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp/getting-started.html">Getting Started</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cpp/examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/bgl.html">Co-Work with BGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/graphscope.html">Integrate into GraphScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/out-of-core.html">Out-of-core Graph Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/snap-to-graphar.html">Convert SNAP Datasets to GraphAr Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../java/index.html">Java</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../java/java-lib.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../java/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/index.html">Spark</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spark/spark-lib.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark/examples/spark.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pyspark/index.html">PySpark</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pyspark/pyspark-lib.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyspark/how-to.html">How to use</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pyspark/api/modules.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pyspark/api/graphar_pyspark.html">graphar_pyspark package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/contributing.html">Contributing Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/java-dev.html">Java Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/community.html">Community</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/alibaba/GraphAr/edit/main/docs/format/status.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="implementation-status">
+<h1>Implementation Status<a class="headerlink" href="#implementation-status" title="Permalink to this headline">#</a></h1>
+<p>The following tables summarize the features available in the various official GraphAr libraries.
+All libraries currently follow version 1.0.0 of the GraphAr format.</p>
+<section id="data-types">
+<h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">#</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Data type
+(primitive)</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>Int32</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>Int64</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>Double</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>String</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>Date</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Timestamp</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Time</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Data type
+(nested)</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>List (*)</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>(*) The data type of List is not supported by the CSV payload file format.</p></li>
+</ul>
+</section>
+<section id="payload-data-file-formats">
+<h2>Payload Data File Formats<a class="headerlink" href="#payload-data-file-formats" title="Permalink to this headline">#</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 11%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Format</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CSV</p></td>
+<td><p>R/W</p></td>
+<td><p>R (1)</p></td>
+<td><p>R/W</p></td>
+<td><p>R/W (2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ORC</p></td>
+<td><p>R/W</p></td>
+<td><p>R (1)</p></td>
+<td><p>R/W</p></td>
+<td><p>R/W (2)</p></td>
+</tr>
+<tr class="row-even"><td><p>Parquet</p></td>
+<td><p>R/W</p></td>
+<td><p>R (1)</p></td>
+<td><p>R/W</p></td>
+<td><p>R/W (2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Avro</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>HDF5</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>JSON</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p><em>R</em> = Read supported</p></li>
+<li><p><em>W</em> = Write supported</p></li>
+</ul>
+<p>Supported compression methods for the file formats:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 11%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Compression</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ZSTD (*)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>(*) Compression is not supported by the CSV payload file format.</p></li>
+</ul>
+</section>
+<section id="property">
+<h2>Property<a class="headerlink" href="#property" title="Permalink to this headline">#</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property feature</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>primary key</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>nullable</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Supported operations in Property:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property operation</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create</p></td>
+<td><p>✓</p></td>
+<td><p>✓ (1)</p></td>
+<td><p>✓</p></td>
+<td><p>✓ (2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>get_name</p></td>
+<td><p>✓</p></td>
+<td><p>✓ (1)</p></td>
+<td><p>✓</p></td>
+<td><p>✓ (2)</p></td>
+</tr>
+<tr class="row-even"><td><p>is_primary_key</p></td>
+<td><p>✓</p></td>
+<td><p>✓ (1)</p></td>
+<td><p>✓</p></td>
+<td><p>✓ (2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>is_nullable</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td><p>✓</p></td>
+<td><p>✓ (2)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="property-group">
+<h2>Property Group<a class="headerlink" href="#property-group" title="Permalink to this headline">#</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Group
+(operation)</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java (1)</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python (2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>add property</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>remove property</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>get properties</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>check property</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>get file type</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get path prefix</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>check validation</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="adjacency-list">
+<h2>Adjacency List<a class="headerlink" href="#adjacency-list" title="Permalink to this headline">#</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Adjacency List
+(type)</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CSR</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSC</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>COO</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Supported operations in Adjacency List:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Adjacency List
+(operation)</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java (1)</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python (2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>get adjacency type</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get file type</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>get path prefix</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>check validation</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="vertex">
+<h2>Vertex<a class="headerlink" href="#vertex" title="Permalink to this headline">#</a></h2>
+<p>Vertex features:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Vertex feature</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>label</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>tag</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>chunk based</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>property group</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p><em>label</em> is the vertex label, which is a unique identifier for the vertex.</p></li>
+<li><p><em>tag</em> is the vertex tag, which is tag or category for the vertex.</p></li>
+</ul>
+<p>Supported operations in Vertex Info:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Vertex Info
+(operation)</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java (1)</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python (2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>add group</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>remove group</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>get label</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get chunk size</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>get groups</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get path prefix</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>check property</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>check validation</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>serialize</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>deserialize</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="edge">
+<h2>Edge<a class="headerlink" href="#edge" title="Permalink to this headline">#</a></h2>
+<p>Edge features:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Edge feature</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>label</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>chunk based</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>property group</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>adjacent list</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>directed</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Supported operations in Edge Info:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Edge Info
+(operation)</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java (1)</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python (2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>add group</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>remove group</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>add adj list</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>remove adj list</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>get label</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get source label</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>get dest label</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get chunk size</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>get source chunk
+size</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get dest chunk
+size</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>get groups</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>check adj list</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>check property</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get file type</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>get path prefix</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>is directed</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>check validation</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>serialize</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>deserialize</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p><em>&lt;source label, label, dest label&gt;</em> is the unique identifier for the edge type.</p></li>
+</ul>
+</section>
+<section id="graph">
+<h2>Graph<a class="headerlink" href="#graph" title="Permalink to this headline">#</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Graph</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>labeled vertex
+(with property)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>labeled edge
+(with property)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>extra info</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Supported operations in Graph Info:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Graph Info
+(operation)</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Java (1)</p></th>
+<th class="head"><p>Scala</p></th>
+<th class="head"><p>Python (2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>create</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>add vertex</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>remove vertex</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>add edge</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>remove edge</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>get name</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>get vertex</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>get edge</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>add extra info</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>remove extra info</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>get extra info</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>check validation</p></td>
+<td><p>✓</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>serialize</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>deserialize</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>(1) Through fastFFI bindings to the GraphAr C++ library.</p></li>
+<li><p>(2) Through py4j bindings to the GraphAr Spark library.</p></li>
+</ul>
+</section>
+<section id="libraries-version-compatibility">
+<h2>Libraries Version Compatibility<a class="headerlink" href="#libraries-version-compatibility" title="Permalink to this headline">#</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>GraphAr C++
+Version</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>CMake</p></th>
+<th class="head"><p>Format Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.11.x</p></td>
+<td><p>17+</p></td>
+<td><p>2.8+</p></td>
+<td><p>1.0.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>GraphAr Java
+Version</p></th>
+<th class="head"><p>Java</p></th>
+<th class="head"><p>Maven</p></th>
+<th class="head"><p>Format Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.1.0</p></td>
+<td><p>1.8</p></td>
+<td><p>3.6+</p></td>
+<td><p>1.0.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 19%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>GraphAr Spark
+Version</p></th>
+<th class="head"><p>Apache Spark
+Version</p></th>
+<th class="head"><p>Scala
+Version</p></th>
+<th class="head"><p>Java
+Version</p></th>
+<th class="head"><p>Hadoop
+Version</p></th>
+<th class="head"><p>Format Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.1.0</p></td>
+<td><p>3.2.x-3.3.x</p></td>
+<td><p>2.12.x</p></td>
+<td><p>1.8, 11</p></td>
+<td><p>3</p></td>
+<td><p>1.0.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 13%" />
+<col style="width: 19%" />
+<col style="width: 13%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>GraphAr PySpark
+Version</p></th>
+<th class="head"><p>Python
+Version</p></th>
+<th class="head"><p>PySpark
+Version</p></th>
+<th class="head"><p>Hadoop
+Version</p></th>
+<th class="head"><p>Format Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.1.0</p></td>
+<td><p>3.8+</p></td>
+<td><p>3.2.x</p></td>
+<td><p>3</p></td>
+<td><p>1.0.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>Since the GraphAr PySpark library is bindings to the GraphAr Spark library,
+the PySpark version should be compatible with the Spark version.</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../cpp/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">C++ Library</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="file-format.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">GraphAr File Format</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, The GraphAr Authors
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa fa-solid fa-github fa-2x" href="https://github.com/alibaba/GraphAr" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Implementation Status</a><ul>
+<li><a class="reference internal" href="#data-types">Data Types</a></li>
+<li><a class="reference internal" href="#payload-data-file-formats">Payload Data File Formats</a></li>
+<li><a class="reference internal" href="#property">Property</a></li>
+<li><a class="reference internal" href="#property-group">Property Group</a></li>
+<li><a class="reference internal" href="#adjacency-list">Adjacency List</a></li>
+<li><a class="reference internal" href="#vertex">Vertex</a></li>
+<li><a class="reference internal" href="#edge">Edge</a></li>
+<li><a class="reference internal" href="#graph">Graph</a></li>
+<li><a class="reference internal" href="#libraries-version-compatibility">Libraries Version Compatibility</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>

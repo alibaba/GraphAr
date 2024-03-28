@@ -1,0 +1,90 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+{
+	"name": "GraphAr",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "registry.cn-hongkong.aliyuncs.com/graphscope/graphar-dev:latest",
+	// "image": "ubuntu:22.04",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2":{
+            "installZsh": "true",
+			"configureZshAsDefaultShell": "true",
+			"installOhMyZsh": true,
+            "upgradePackages": "false"
+        }
+    },
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"streetsidesoftware.code-spell-checker",
+				"eamodio.gitlens",
+				"github.copilot",
+				"github.copilot-labs"
+			]
+		}
+	},
+
+	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "graphar",
+
+	// Use 'postCreateCommand' to run commands before the container is created.
+	"initializeCommand": "sudo docker pull registry.cn-hongkong.aliyuncs.com/graphscope/graphar-dev:latest",
+
+	// Uncomment this to enable C++ and Rust debugging in containers
+	// "capAdd": ["SYS_PTRACE"],
+	// "securityOpt": ["seccomp=unconfined"],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [3000],
+
+	// Use 'portsAttributes' to set default properties for specific forwarded ports.
+	// More info: https://containers.dev/implementors/json_reference/#port-attributes
+	// "portsAttributes": {
+	// 	"9000": {
+	// 		"label": "Hello Remote World",
+	// 		"onAutoForward": "notify"
+	// 	}
+	// },
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "yarn install"
+
+	// Improve performance
+
+	// Uncomment these to mount a folder to a volume
+	// https://code.visualstudio.com/remote/advancedcontainers/improve-performance#_use-a-targeted-named-volume
+	// "mounts": [
+    // 	"source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+	// ],
+
+
+	// Uncomment these to use a named volume for your entire source tree
+	// https://code.visualstudio.com/remote/advancedcontainers/improve-performance#_use-a-named-volume-for-your-entire-source-tree
+	// "workspaceMount": "source=gs,target=/workspaces,type=volume",
+	// "workspaceFolder": "/workspaces"
+	"postCreateCommand": "sudo chown -R graphar /workspaces && bash pre-commit/install-hook.sh && bash pre-commit/prepare-commit-msg"
+}

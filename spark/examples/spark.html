@@ -1,0 +1,535 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="Co-Work with Apache Spark" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="spark/examples/spark.html" />
+<meta property="og:site_name" content="GraphAr" />
+<meta property="og:description" content="Apache Spark is a multi-language engine for executing data engineering, data science, and machine learning on single-node machines or clusters. The GraphAr Spark library is developed to make the in..." />
+<meta name="description" content="Apache Spark is a multi-language engine for executing data engineering, data science, and machine learning on single-node machines or clusters. The GraphAr Spark library is developed to make the in..." />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="API Reference (scaladoc)" href="../reference/index.html" /><link rel="prev" title="GraphAr Spark Library" href="../spark-lib.html" />
+
+    <link rel="shortcut icon" href="../../_static/graphar.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+        <title>Co-Work with Apache Spark - GraphAr</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/brands.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/v4-shims.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/panels.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+  <script>
+    document.body.dataset.theme = "light";
+  </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">GraphAr</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">GraphAr</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Format Specification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../format/file-format.html">File Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../format/status.html">Implementation Status</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cpp/index.html">C++</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cpp/getting-started.html">Getting Started</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../cpp/examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp/examples/bgl.html">Co-Work with BGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp/examples/graphscope.html">Integrate into GraphScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp/examples/out-of-core.html">Out-of-core Graph Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp/examples/snap-to-graphar.html">Convert SNAP Datasets to GraphAr Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cpp/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../java/index.html">Java</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../java/java-lib.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../java/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Spark</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../spark-lib.html">Getting Started</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pyspark/index.html">PySpark</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pyspark/pyspark-lib.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyspark/how-to.html">How to use</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../pyspark/api/modules.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../pyspark/api/graphar_pyspark.html">graphar_pyspark package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/contributing.html">Contributing Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/java-dev.html">Java Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/community.html">Community</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/alibaba/GraphAr/edit/main/docs/spark/examples/spark.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="co-work-with-apache-spark">
+<h1>Co-Work with Apache Spark<a class="headerlink" href="#co-work-with-apache-spark" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://spark.apache.org/">Apache Spark</a> is a multi-language engine for executing data engineering, data science, and machine learning on single-node machines or clusters. The GraphAr Spark library is developed to make the integration of GraphAr with Spark easy. This library allows users to efficiently generate, load, and transform GAR files, and to integrate GraphAr with other Spark-compatible systems.</p>
+<p>Examples of this co-working integration have been provided as showcases.</p>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="transform-gar-files">
+<h3>Transform GAR files<a class="headerlink" href="#transform-gar-files" title="Permalink to this headline">#</a></h3>
+<p>We provide an example in <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TestGraphTransformer.scala">TestGraphTransformer.scala</a>, which demonstrates
+how to conduct data transformation at the graph level. <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TransformExample.scala">TransformExample.scala</a> is
+another example for graph data conversion between different file types or different
+adjList types, which is implemented at the vertex/edge table level. To do this,
+the original data is first loaded into a Spark DataFrame using the GraphAr Spark Reader.
+Then, the DataFrame is written into generated GAR files through a GraphAr Spark Writer,
+following the meta data defined in a new information file.</p>
+</section>
+<section id="compute-with-graphx">
+<h3>Compute with GraphX<a class="headerlink" href="#compute-with-graphx" title="Permalink to this headline">#</a></h3>
+<p>Another important use case of GraphAr is to use it as a data source for graph
+computing or analytics; <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/ComputeExample.scala">ComputeExample.scala</a> provides an example of constructing
+a GraphX graph from reading GAR files and executing a connected-components computation.
+Also, executing queries with Spark SQL and running other graph analytic algorithms
+can be implemented in a similar fashion.</p>
+</section>
+<section id="import-export-graphs-of-neo4j">
+<h3>Import/Export graphs of Neo4j<a class="headerlink" href="#import-export-graphs-of-neo4j" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="https://neo4j.com/product/neo4j-graph-database/">Neo4j</a> graph database provides
+a <a class="reference external" href="https://neo4j.com/docs/spark/current/overview/">spark connector</a> for integration
+with Spark. The Neo4j Spark Connector, combined with the GraphAr Spark library,
+enables us to migrate graph data between Neo4j and GraphAr. This is also a key application
+of GraphAr in which it acts as a persistent storage of graph data in the database.</p>
+<p>We provide two example programs that demonstrate how GraphAr can be used in conjunction
+with Neo4j. It utilizes one of the built-in Neo4j datasets, the <a class="reference external" href="https://neo4j.com/developer/example-data/#built-in-examples">Movie Graph</a>,
+which is a mini graph application containing actors and directors that are related through the movies they have collaborated on.
+Given some necessary information like the chunk size, the prefix of the file path, and the file type,
+the program can read the graph data from Neo4j and write it into GraphAr files.
+When exporting graph data from Neo4j and writing to GraphAr, please refer to the following code,
+with <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/main/scala/com/alibaba/graphar/example/Neo4j2GraphAr.scala">Neo4j2GraphAr.scala</a> providing a complete example.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// connect to the Neo4j instance</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">spark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">SparkSession</span><span class="p">.</span><span class="n">builder</span><span class="p">()</span>
+<span class="w">      </span><span class="p">.</span><span class="n">appName</span><span class="p">(</span><span class="s">&quot;Neo4j to GraphAr for Movie Graph&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;neo4j.url&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bolt://localhost:7687&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;neo4j.authentication.type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;neo4j.authentication.basic.username&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;Neo4j_USR&quot;</span><span class="p">).</span><span class="n">get</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;neo4j.authentication.basic.password&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;Neo4j_PWD&quot;</span><span class="p">).</span><span class="n">get</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;spark.master&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;local&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1">// initialize a graph writer</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">writer</span><span class="p">:</span><span class="w"> </span><span class="nc">GraphWriter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">GraphWriter</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1">// put movie graph data into writer</span>
+<span class="w">    </span><span class="n">readAndPutDataIntoWriter</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// write in graphar format</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">outputPath</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">vertexChunkSize</span><span class="p">:</span><span class="w"> </span><span class="nc">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">toLong</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">edgeChunkSize</span><span class="p">:</span><span class="w"> </span><span class="nc">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">toLong</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">fileType</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">writer</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">outputPath</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MovieGraph&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">vertexChunkSize</span><span class="p">,</span><span class="w"> </span><span class="n">edgeChunkSize</span><span class="p">,</span><span class="w"> </span><span class="n">fileType</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <cite>readAndPutDataIntoWriter</cite> method read the vertex and edge from Neo4j to DataFrame
+(Refer to <a class="reference external" href="https://neo4j.com/docs/spark/current/reading/">Neo4j docs</a> for more details),
+and then put then into a GraphAr GraphWriter.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">readAndPutDataIntoWriter</span><span class="p">(</span><span class="n">writer</span><span class="p">:</span><span class="w"> </span><span class="nc">GraphWriter</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">:</span><span class="w"> </span><span class="nc">SparkSession</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// read vertices with label &quot;Person&quot; from Neo4j as a DataFrame</span>
+<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">person_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;org.neo4j.spark.DataSource&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;query&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MATCH (n:Person) RETURN n.name AS name, n.born as born&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">load</span><span class="p">()</span>
+<span class="w">  </span><span class="c1">// put into writer, vertex label is &quot;Person&quot;</span>
+<span class="w">  </span><span class="n">writer</span><span class="p">.</span><span class="nc">PutVertexData</span><span class="p">(</span><span class="s">&quot;Person&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">person_df</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1">// read vertices with label &quot;Movie&quot; from Neo4j as a DataFrame</span>
+<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">movie_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;org.neo4j.spark.DataSource&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;query&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MATCH (n:Movie) RETURN n.title AS title, n.tagline as tagline&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">load</span><span class="p">()</span>
+<span class="w">  </span><span class="c1">// put into writer, vertex label is &quot;Movie&quot;</span>
+<span class="w">  </span><span class="n">writer</span><span class="p">.</span><span class="nc">PutVertexData</span><span class="p">(</span><span class="s">&quot;Movie&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">movie_df</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1">// read edges with type &quot;Person&quot;-&gt;&quot;PRODUCED&quot;-&gt;&quot;Movie&quot; from Neo4j as a DataFrame</span>
+<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">produced_edge_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;org.neo4j.spark.DataSource&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;query&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MATCH (a:Person)-[r:PRODUCED]-&gt;(b:Movie) return a.name as src, b.title as dst&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">load</span><span class="p">()</span>
+<span class="w">  </span><span class="c1">// put into writer, source vertex label is &quot;Person&quot;, edge label is &quot;PRODUCED&quot;</span>
+<span class="w">  </span><span class="c1">// target vertex label is &quot;Movie&quot;</span>
+<span class="w">  </span><span class="n">writer</span><span class="p">.</span><span class="nc">PutEdgeData</span><span class="p">((</span><span class="s">&quot;Person&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PRODUCED&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Movie&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">produced_edge_df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, the <cite>write</cite> method writes the graph data in GraphAr format to the specified path.</p>
+<p>Additionally, when importing data from GraphAr to create/update instances in Neo4j, please refer to the following code:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// connect to the Neo4j instance</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">spark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">SparkSession</span><span class="p">.</span><span class="n">builder</span><span class="p">()</span>
+<span class="w">      </span><span class="p">.</span><span class="n">appName</span><span class="p">(</span><span class="s">&quot;GraphAr to Neo4j for Movie Graph&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;neo4j.url&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bolt://localhost:7687&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;neo4j.authentication.type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;basic&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;neo4j.authentication.basic.username&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;Neo4j_USR&quot;</span><span class="p">).</span><span class="n">get</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;neo4j.authentication.basic.password&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;Neo4j_PWD&quot;</span><span class="p">).</span><span class="n">get</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;spark.master&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;local&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1">// path to the graph information file</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">graphInfoPath</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">graphInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GraphInfo</span><span class="p">.</span><span class="n">loadGraphInfo</span><span class="p">(</span><span class="n">graphInfoPath</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">graphData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GraphReader</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">graphInfoPath</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">vertexData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphData</span><span class="p">.</span><span class="n">_1</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">edgeData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphData</span><span class="p">.</span><span class="n">_2</span>
+
+<span class="w">    </span><span class="n">putVertexDataIntoNeo4j</span><span class="p">(</span><span class="n">graphInfo</span><span class="p">,</span><span class="w"> </span><span class="n">vertexData</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+<span class="w">    </span><span class="n">putEdgeDataIntoNeo4j</span><span class="p">(</span><span class="n">graphInfo</span><span class="p">,</span><span class="w"> </span><span class="n">vertexData</span><span class="p">,</span><span class="w"> </span><span class="n">edgeData</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Pass the graph information file path to <cite>loadGraphInfo</cite> method to get the graph information.
+Then, read the graph data from GraphAr files with <cite>GraphReader</cite> as DataFrame pair,
+<cite>_1</cite> for vertices and <cite>_2</cite> for edges.</p>
+<p>The <cite>putVertexDataIntoNeo4j</cite> and <cite>putEdgeDataIntoNeo4j</cite> methods creates or updates the vertices DataFrame and edges DataFrame in Neo4j.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">putVertexDataIntoNeo4j</span><span class="p">(</span><span class="n">graphInfo</span><span class="p">:</span><span class="w"> </span><span class="nc">GraphInfo</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">vertexData</span><span class="p">:</span><span class="w"> </span><span class="nc">Map</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">DataFrame</span><span class="p">],</span>
+<span class="w">                           </span><span class="n">spark</span><span class="p">:</span><span class="w"> </span><span class="nc">SparkSession</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// write each vertex type to Neo4j</span>
+<span class="w">  </span><span class="n">vertexData</span><span class="p">.</span><span class="n">foreach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">primaryKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphInfo</span><span class="p">.</span><span class="n">getVertexInfo</span><span class="p">(</span><span class="n">key</span><span class="p">).</span><span class="n">getPrimaryKey</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// the vertex index column is not needed in Neo4j</span>
+<span class="w">    </span><span class="c1">// write to Neo4j, refer to https://neo4j.com/docs/spark/current/writing/</span>
+<span class="w">    </span><span class="n">df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="nc">GeneralParams</span><span class="p">.</span><span class="n">vertexIndexCol</span><span class="p">).</span><span class="n">write</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;org.neo4j.spark.DataSource&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">mode</span><span class="p">(</span><span class="nc">SaveMode</span><span class="p">.</span><span class="nc">Overwrite</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;labels&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;node.keys&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">primaryKey</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+<span class="w">  </span><span class="p">}}</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">putEdgeDataIntoNeo4j</span><span class="p">(</span><span class="n">graphInfo</span><span class="p">:</span><span class="w"> </span><span class="nc">GraphInfo</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">vertexData</span><span class="p">:</span><span class="w"> </span><span class="nc">Map</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">DataFrame</span><span class="p">],</span>
+<span class="w">                         </span><span class="n">edgeData</span><span class="p">:</span><span class="w"> </span><span class="nc">Map</span><span class="p">[(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">String</span><span class="p">),</span><span class="w"> </span><span class="nc">Map</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">DataFrame</span><span class="p">]],</span>
+<span class="w">                         </span><span class="n">spark</span><span class="p">:</span><span class="w"> </span><span class="nc">SparkSession</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// write each edge type to Neo4j</span>
+<span class="w">  </span><span class="n">edgeData</span><span class="p">.</span><span class="n">foreach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// key is (source vertex label, edge label, target vertex label)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">sourceLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="n">_1</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">edgeLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="n">_2</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">targetLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="n">_3</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">sourcePrimaryKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphInfo</span><span class="p">.</span><span class="n">getVertexInfo</span><span class="p">(</span><span class="n">sourceLabel</span><span class="p">).</span><span class="n">getPrimaryKey</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">targetPrimaryKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphInfo</span><span class="p">.</span><span class="n">getVertexInfo</span><span class="p">(</span><span class="n">targetLabel</span><span class="p">).</span><span class="n">getPrimaryKey</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">sourceDf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertexData</span><span class="p">(</span><span class="n">sourceLabel</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">targetDf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertexData</span><span class="p">(</span><span class="n">targetLabel</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// convert the source and target index column to the primary key column</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Utils</span><span class="p">.</span><span class="n">joinEdgesWithVertexPrimaryKey</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">_2</span><span class="p">,</span><span class="w"> </span><span class="n">sourceDf</span><span class="p">,</span><span class="w"> </span><span class="n">targetDf</span><span class="p">,</span><span class="w"> </span><span class="n">sourcePrimaryKey</span><span class="p">,</span><span class="w"> </span><span class="n">targetPrimaryKey</span><span class="p">)</span><span class="w">  </span><span class="c1">// use the first DataFrame of (adj_list_type_str, DataFrame) map</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">edgeLabel</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;REVIEWED&quot;</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;rating,summary&quot;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+
+<span class="w">    </span><span class="c1">// write to Neo4j, refer to https://neo4j.com/docs/spark/current/writing/</span>
+<span class="w">    </span><span class="n">df</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;org.neo4j.spark.DataSource&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">mode</span><span class="p">(</span><span class="nc">SaveMode</span><span class="p">.</span><span class="nc">Overwrite</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">edgeLabel</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship.save.strategy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keys&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship.source.labels&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sourceLabel</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship.source.save.mode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;match&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship.source.node.keys&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;src:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sourcePrimaryKey</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship.target.labels&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">targetLabel</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship.target.save.mode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;match&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship.target.node.keys&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dst:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">targetPrimaryKey</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;relationship.properties&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">properties</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+<span class="w">  </span><span class="p">}}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, you will see the graph in Neo4j Browser after running the above code.</p>
+<p>See <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/main/scala/com/alibaba/graphar/example/GraphAr2Neo4j.scala">GraphAr2Neo4j.scala</a> for the complete example.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul class="simple">
+<li><p>The Neo4j Spark Connector offers different save modes and writing options, such as Append(CREATE) or Overwrite(MERGE). Please refer to its <a class="reference external" href="https://neo4j.com/docs/spark/current/writing/">documentation</a> for more information and take the most appropriate method while using.</p></li>
+<li><p>The Neo4j Spark Connector supports to use <a class="reference external" href="https://neo4j.com/docs/spark/current/streaming/">Spark structured streaming API</a>, which works differently from Spark batching. One can utilize this API to read/write a stream from/to Neo4j, avoiding to maintain all data in the memory.</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../reference/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API Reference (scaladoc)</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../spark-lib.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">GraphAr Spark Library</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, The GraphAr Authors
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa fa-solid fa-github fa-2x" href="https://github.com/alibaba/GraphAr" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Co-Work with Apache Spark</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#transform-gar-files">Transform GAR files</a></li>
+<li><a class="reference internal" href="#compute-with-graphx">Compute with GraphX</a></li>
+<li><a class="reference internal" href="#import-export-graphs-of-neo4j">Import/Export graphs of Neo4j</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>

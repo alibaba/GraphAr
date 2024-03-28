@@ -1,0 +1,11 @@
+org.apache.graphar.arrow
+org.apache.graphar.edges
+org.apache.graphar.graphinfo
+org.apache.graphar.readers.arrowchunk
+org.apache.graphar.readers.chunkinfo
+org.apache.graphar.stdcxx
+org.apache.graphar.types
+org.apache.graphar.util
+org.apache.graphar.vertices
+org.apache.graphar.writers
+org.apache.graphar.writers.builder

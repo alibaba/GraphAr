@@ -1,0 +1,30 @@
+-locale
+'en_US'
+-classpath
+'/home/runner/.m2/repository/com/alibaba/fastffi/ffi/0.1.2/ffi-0.1.2.jar:/home/runner/.m2/repository/com/alibaba/fastffi/annotation-processor/0.1.2/annotation-processor-0.1.2.jar:/home/runner/.m2/repository/com/squareup/javapoet/1.13.0/javapoet-1.13.0.jar:/home/runner/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/runner/.m2/repository/com/alibaba/fastffi/llvm4jni-runtime/0.1.2/llvm4jni-runtime-0.1.2.jar:/home/runner/.m2/repository/com/github/jnr/jnr-ffi/2.2.12/jnr-ffi-2.2.12.jar:/home/runner/.m2/repository/com/github/jnr/jffi/1.3.9/jffi-1.3.9.jar:/home/runner/.m2/repository/org/ow2/asm/asm/9.2/asm-9.2.jar:/home/runner/.m2/repository/org/ow2/asm/asm-commons/9.2/asm-commons-9.2.jar:/home/runner/.m2/repository/org/ow2/asm/asm-analysis/9.2/asm-analysis-9.2.jar:/home/runner/.m2/repository/org/ow2/asm/asm-tree/9.2/asm-tree-9.2.jar:/home/runner/.m2/repository/org/ow2/asm/asm-util/9.2/asm-util-9.2.jar:/home/runner/.m2/repository/com/github/jnr/jnr-a64asm/1.0.0/jnr-a64asm-1.0.0.jar:/home/runner/.m2/repository/com/github/jnr/jnr-x86asm/1.0.2/jnr-x86asm-1.0.2.jar:/home/runner/.m2/repository/com/alibaba/fastffi/llvm4jni/0.1.2/llvm4jni-0.1.2-linux-x86_64.jar:/home/runner/.m2/repository/com/alibaba/fastffi/llvm/0.1.2/llvm-0.1.2.jar:/home/runner/.m2/repository/com/alibaba/fastffi/llvm/0.1.2/llvm-0.1.2-linux-x86_64.jar:/home/runner/.m2/repository/org/apache/arrow/arrow-c-data/13.0.0/arrow-c-data-13.0.0.jar:/home/runner/.m2/repository/org/apache/arrow/arrow-memory-core/13.0.0/arrow-memory-core-13.0.0.jar:/home/runner/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/home/runner/.m2/repository/org/apache/arrow/arrow-vector/13.0.0/arrow-vector-13.0.0.jar:/home/runner/.m2/repository/org/apache/arrow/arrow-format/13.0.0/arrow-format-13.0.0.jar:/home/runner/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.1/jackson-core-2.15.1.jar:/home/runner/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.1/jackson-annotations-2.15.1.jar:/home/runner/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.1/jackson-databind-2.15.1.jar:/home/runner/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.1/jackson-datatype-jsr310-2.15.1.jar:/home/runner/.m2/repository/commons-codec/commons-codec/1.15/commons-codec-1.15.jar:/home/runner/.m2/repository/io/netty/netty-common/4.1.96.Final/netty-common-4.1.96.Final.jar:/home/runner/.m2/repository/com/google/flatbuffers/flatbuffers-java/1.12.0/flatbuffers-java-1.12.0.jar:/home/runner/.m2/repository/org/apache/arrow/arrow-memory-netty/13.0.0/arrow-memory-netty-13.0.0.jar:/home/runner/.m2/repository/io/netty/netty-buffer/4.1.96.Final/netty-buffer-4.1.96.Final.jar:/home/runner/.m2/repository/org/apache/arrow/arrow-dataset/13.0.0/arrow-dataset-13.0.0.jar:/home/runner/.m2/repository/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'8'
+-sourcepath
+'/home/runner/work/GraphAr/GraphAr/java/src/main/java:/home/runner/work/GraphAr/GraphAr/java/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/runner/work/GraphAr/GraphAr/docs/_build/html/java/reference'
+-docencoding
+'UTF-8'
+-doctitle
+'gar-java 0.1.0 API'
+-group
+'GarphAr' 'org.apache.graphar*'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' '/home/runner/work/GraphAr/GraphAr/java/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'gar-java 0.1.0 API'

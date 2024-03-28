@@ -1,0 +1,44 @@
+header:
+  license:
+    spdx-id: Apache-2.0
+    copyright-owner: Apache Software Foundation
+
+  paths-ignore:
+    - 'dist'
+    - 'licenses'
+    - 'LICENSE'
+    - 'NOTICE'
+    - 'DISCLAIMER'
+    - 'testing'
+    - 'spark/graphar/src/test/resources'
+    - 'java/src/test/resources'
+    - '.licenserc.yaml'
+    - '.gitignore'
+    - '.gitleaks.toml'
+    - '.gitmodules'
+    - 'pre-commit-config.yaml'
+    - 'docs'
+    - '**/.gitignore'
+    - '**/.scalafix.conf'
+    - '**/.scalafmt.conf'
+    - 'cpp/apidoc'
+    - 'cpp/thirdparty'
+    - 'cpp/include/gar/external/result.hpp'
+    - 'cpp/misc/cpplint.py'
+    - 'spark/datasources-32/src/main/scala/org/apache/graphar/datasources'
+    - 'spark/datasources-33/src/main/scala/org/apache/graphar/datasources'
+    - 'java/src/main/java/org/apache/graphar/stdcxx/StdString.java'
+    - 'java/src/main/java/org/apache/graphar/stdcxx/StdVector.java'
+    - '*.md'
+    - '**/*.md'
+    - '*.rst'
+    - '**/*.json'
+    - 'pyspark/poetry.lock' # This file is generated automatically by Poetry-tool; there is no way to add license header
+
+  comment: on-failure
+
+# If you don't want to check dependencies' license compatibility, remove the following part
+dependency:
+  files:
+    - spark/pom.xml           # If this is a maven project.
+    - java/pom.xml           # If this is a maven project.

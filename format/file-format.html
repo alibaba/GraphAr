@@ -1,0 +1,544 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="GraphAr File Format" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="format/file-format.html" />
+<meta property="og:site_name" content="GraphAr" />
+<meta property="og:description" content="Property Graph: GraphAr is designed for representing and storing the property graphs. Graph (in discrete mathematics) is a structure made of vertices and edges. Property graph is then a type of gra..." />
+<meta name="description" content="Property Graph: GraphAr is designed for representing and storing the property graphs. Graph (in discrete mathematics) is a structure made of vertices and edges. Property graph is then a type of gra..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Implementation Status" href="status.html" /><link rel="prev" title="Concepts" href="../overview/concepts.html" />
+
+    <link rel="shortcut icon" href="../_static/graphar.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+        <title>GraphAr File Format - GraphAr</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/brands.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/v4-shims.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/panels.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+  <script>
+    document.body.dataset.theme = "light";
+  </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GraphAr</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">GraphAr</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Format Specification</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">File Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="status.html">Implementation Status</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Libraries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cpp/index.html">C++</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp/getting-started.html">Getting Started</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cpp/examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/bgl.html">Co-Work with BGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/graphscope.html">Integrate into GraphScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/out-of-core.html">Out-of-core Graph Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/snap-to-graphar.html">Convert SNAP Datasets to GraphAr Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../java/index.html">Java</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../java/java-lib.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../java/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/index.html">Spark</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spark/spark-lib.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark/examples/spark.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pyspark/index.html">PySpark</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pyspark/pyspark-lib.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyspark/how-to.html">How to use</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pyspark/api/modules.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pyspark/api/graphar_pyspark.html">graphar_pyspark package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/contributing.html">Contributing Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/java-dev.html">Java Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/community.html">Community</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/alibaba/GraphAr/edit/main/docs/format/file-format.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="graphar-file-format">
+<h1>GraphAr File Format<a class="headerlink" href="#graphar-file-format" title="Permalink to this headline">#</a></h1>
+<section id="property-graph">
+<h2>Property Graph<a class="headerlink" href="#property-graph" title="Permalink to this headline">#</a></h2>
+<p>GraphAr is designed for representing and storing the property graphs. Graph (in discrete mathematics) is a structure made of vertices and edges.
+Property graph is then a type of graph model where the vertices/edges could carry a name (also called as type or label) and some properties.
+Since carrying additional information than non-property graphs, the property graph is able to represent
+connections among data scattered across diverse data databases and with different schemas.
+Compared with the relational database schema, the property graph excels at showing data dependencies.
+Therefore, it is widely-used in modeling modern applications including social network analytics, data mining,
+network routing, scientific computing and so on.</p>
+<p>A property graph consists of vertices and edges, with each vertex contains a unique identifier and:</p>
+<ul class="simple">
+<li><p>A text label that describes the vertex type.</p></li>
+<li><p>A collection of properties, with each property can be represented by a key-value pair.</p></li>
+</ul>
+<p>Each edge contains a unique identifier and:</p>
+<ul class="simple">
+<li><p>The outgoing vertex (source).</p></li>
+<li><p>The incoming vertex (destination).</p></li>
+<li><p>A text label that describes the relationship between the two vertices.</p></li>
+<li><p>A collection of properties.</p></li>
+</ul>
+<p>The following is an example property graph containing two types of vertices (“person” and “comment”) and three types of edges.</p>
+<a class="reference internal image-reference" href="../_images/property_graph.png"><img alt="property graph" class="align-center" src="../_images/property_graph.png" style="width: 700px;" /></a>
+</section>
+<section id="property-data-types">
+<h2>Property Data Types<a class="headerlink" href="#property-data-types" title="Permalink to this headline">#</a></h2>
+<p>GraphAr support a set of built-in property data types that are common in real use cases and supported by most file types (CSV, ORC, Parquet), includes:</p>
+<ul class="simple">
+<li><p><strong>Boolean</strong></p></li>
+<li><p><strong>Int32</strong>: Integer with 32 bits</p></li>
+<li><p><strong>Int64</strong>: Integer with 64 bits</p></li>
+<li><p><strong>Float</strong>: 32-bit floating point values</p></li>
+<li><p><strong>Double</strong>: 64-bit floating point values</p></li>
+<li><p><strong>String</strong>: Textual data</p></li>
+<li><p><strong>Date</strong>: days since the Unix epoch</p></li>
+<li><p><strong>Timestamp</strong>: milliseconds since the Unix epoch</p></li>
+<li><p><strong>Time</strong>: milliseconds since midnight</p></li>
+<li><p><strong>List</strong>: A list of values of the same type</p></li>
+</ul>
+<p>GraphAr also supports the user-defined data types, which can be used to represent complex data structures,
+such as the struct, map, and union types.</p>
+</section>
+<section id="configurations">
+<h2>Configurations<a class="headerlink" href="#configurations" title="Permalink to this headline">#</a></h2>
+<section id="vertex-chunk-size">
+<h3>Vertex Chunk Size<a class="headerlink" href="#vertex-chunk-size" title="Permalink to this headline">#</a></h3>
+<p>The vertex chunk size is a configuration parameter that determines the number of vertices in a vertex chunk
+and used to partition the logical vertex table into multiple physical vertex tables.</p>
+<p>The vertex chunk size should be set to a value that is large enough to reduce the overhead of reading/writing files,
+but small enough to avoid reading/writing too many vertices at once. We recommend setting the vertex chunk size to
+empirical value 2^18 (262,144) for most cases.</p>
+</section>
+<section id="edge-chunk-size">
+<h3>Edge Chunk Size<a class="headerlink" href="#edge-chunk-size" title="Permalink to this headline">#</a></h3>
+<p>The edge chunk size is a configuration parameter that determines the number of edges in an edge chunk
+and used to partition the logical edge table into multiple physical edge tables.</p>
+<p>The edge chunk size should be set to a value that is large enough to reduce the overhead of reading/writing files,
+but small enough to avoid reading/writing too many edges at once. We recommend setting the edge chunk size to
+empirical value 2^22 (4,194,304) for most cases.</p>
+</section>
+<section id="data-file-format">
+<h3>Data File Format<a class="headerlink" href="#data-file-format" title="Permalink to this headline">#</a></h3>
+<p>GraphAr supports multiple file formats for storing the actual data of vertices and edges,
+including Apache ORC, Apache Parquet, CSV, and JSON.</p>
+<p>The file format should be chosen based on the specific use case and the data processing framework that will be used to
+process the graph data. For example, if the graph data will be processed using Apache Spark,
+then the Apache Parquet file format is recommended.</p>
+</section>
+<section id="adjacency-list-type">
+<h3>Adjacency List Type<a class="headerlink" href="#adjacency-list-type" title="Permalink to this headline">#</a></h3>
+<p>Adjacency list is a data structure used to represent the edges of a graph. GraphAr supports multiple types of adjacency lists for a given group of edges, including:</p>
+<ul class="simple">
+<li><p><strong>ordered_by_source</strong>: all the edges in the logical table are ordered and further partitioned by the internal vertex id of the source, which can be seen as the CSR format.</p></li>
+<li><p><strong>ordered_by_dest</strong>: all the edges in the logical table are ordered and further partitioned by the internal vertex id of the destination, which can be seen as the CSC format.</p></li>
+<li><p><strong>unordered_by_source</strong>: the internal id of the source vertex is used as the partition key to divide the edges into different sub-logical-tables, and the edges in each sub-logical-table are unordered, which can be seen as the COO format.</p></li>
+<li><p><strong>unordered_by_dest</strong>: the internal id of the destination vertex is used as the partition key to divide the edges into different sub-logical-tables, and the edges in each sub-logical-table are unordered, which can also be seen as the COO format.</p></li>
+</ul>
+</section>
+</section>
+<section id="vertex-chunks-in-graphar">
+<h2>Vertex Chunks in GraphAr<a class="headerlink" href="#vertex-chunks-in-graphar" title="Permalink to this headline">#</a></h2>
+<section id="logical-table-of-vertices">
+<h3>Logical table of vertices<a class="headerlink" href="#logical-table-of-vertices" title="Permalink to this headline">#</a></h3>
+<p>Each type of vertices (with the same label) constructs a logical vertex table, with each vertex assigned with a global index inside this type (called internal vertex id) starting from 0, corresponding to the row number of the vertex in the logical vertex table. An example layout for a logical table of vertices under the label “person” is provided for reference.</p>
+<p>Given an internal vertex id and the vertex label, a vertex is uniquely identifiable and its respective properties can be accessed from this table. The internal vertex id is further used to identify the source and destination vertices when maintaining the topology of the graph.</p>
+<a class="reference internal image-reference" href="../_images/vertex_logical_table.png"><img alt="vertex logical table" class="align-center" src="../_images/vertex_logical_table.png" style="width: 650px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the logical vertex table, some property can be marked as the primary key, such as the “id” column of the “person” table.</p>
+</div>
+</section>
+<section id="physical-table-of-vertices">
+<h3>Physical table of vertices<a class="headerlink" href="#physical-table-of-vertices" title="Permalink to this headline">#</a></h3>
+<p>The logical vertex table will be partitioned into multiple continuous vertex chunks for enhancing the reading/writing efficiency. To maintain the ability of random access, the size of vertex chunks for the same label is fixed. To support to access required properties avoiding reading all properties from the files, and to add properties for vertices without modifying the existing files, the columns of the logical table will be divided into several column groups.</p>
+<p>Take the “person” vertex table as an example, if the chunk size is set to be 500, the logical table will be separated into sub-logical-tables of 500 rows with the exception of the last one, which may have less than 500 rows. The columns for maintaining properties will also be divided into distinct groups (e.g., 2 for our example). As a result, a total of 4 physical vertex tables are created for storing the example logical table, which can be seen from the following figure.</p>
+<a class="reference internal image-reference" href="../_images/vertex_physical_table.png"><img alt="vertex physical table" class="align-center" src="../_images/vertex_physical_table.png" style="width: 650px;" /></a>
+<p><strong>Note</strong>: For efficiently utilize the filter push-down of the payload file format like Parquet, the internal vertex id is stored in the payload file as a column. And since the internal vertex id is continuous, the payload file format can use the delta encoding for the internal vertex id column, which would not bring too much overhead for the storage.</p>
+</section>
+</section>
+<section id="edge-chunks-in-graphar">
+<h2>Edge Chunks in GraphAr<a class="headerlink" href="#edge-chunks-in-graphar" title="Permalink to this headline">#</a></h2>
+<section id="logical-table-of-edges">
+<h3>Logical table of edges<a class="headerlink" href="#logical-table-of-edges" title="Permalink to this headline">#</a></h3>
+<p>For maintaining a type of edges (that with the same triplet of the source label, edge label, and destination label), a logical edge table is established.  And in order to support quickly creating a graph from the graph storage file, the logical edge table could maintain the topology information in a way similar to CSR/CSC (learn more about <a class="reference external" href="https://en.wikipedia.org/wiki/Sparse_matrix">CSR/CSC</a>), that is, the edges are ordered by the internal vertex id of either source or destination. In this way, an offset table is required to store the start offset for each vertex’s edges, and the edges with the same source/destination will be stored continuously in the logical table.</p>
+<p>Take the logical table for “person likes person” edges as an example, the logical edge table looks like:</p>
+<a class="reference internal image-reference" href="../_images/edge_logical_table.png"><img alt="edge logical table" class="align-center" src="../_images/edge_logical_table.png" style="width: 650px;" /></a>
+</section>
+<section id="physical-table-of-edges">
+<h3>Physical table of edges<a class="headerlink" href="#physical-table-of-edges" title="Permalink to this headline">#</a></h3>
+<p>As same with the vertex table, the logical edge table is also partitioned into some sub-logical-tables, with each sub-logical-table contains edges that the source (or destination) vertices are in the same vertex chunk. According to the partition strategy and the order of the edges, edges can be stored in GraphAr following the setting adjacency list type.</p>
+<p>After that, the whole logical table of edges will be divided into multiple sub-logical-tables with each sub-logical-table contains edges that the source (or destination) vertices are in the same vertex chunk. Then, a sub-logical-table is further divided into edge chunks of a predefined, fixed number of rows (referred to as edge chunk size). Finally, an edge chunk is separated into physical tables in the following way:</p>
+<ul class="simple">
+<li><p>an adjList table (which contains only two columns: the internal vertex id of the source and the destination).</p></li>
+<li><p>0 or more property group tables (each contains the properties of the edges).</p></li>
+</ul>
+<p>Additionally, there would be an offset table for <strong>ordered_by_source</strong> or <strong>ordered_by_dest</strong> edges. The offset table is used to record the starting point of the edges for each vertex. The partition of the offset table should be in alignment with the partition of the corresponding vertex table. The first row of each offset chunk is always 0, indicating the starting point for the corresponding sub-logical-table for edges.</p>
+<p>Take the “person knows person” edges to illustrate. Suppose the vertex chunk size is set to 500 and the edge chunk size is 1024, and the edges are <strong>ordered_by_source</strong>, then the edges could be saved in the following physical tables:</p>
+<a class="reference internal image-reference" href="../_images/edge_physical_table1.png"><img alt="edge physical table1" class="align-center" src="../_images/edge_physical_table1.png" style="width: 650px;" /></a>
+<a class="reference internal image-reference" href="../_images/edge_physical_table2.png"><img alt="edge physical table2" class="align-center" src="../_images/edge_physical_table2.png" style="width: 650px;" /></a>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When the edge type is <strong>ordered_by_source</strong>, the sorted adjList table together with the offset table can be used as CSR, supporting the fast access of the outgoing edges for a given vertex. Similarly, a CSC view can be constructed by sorting the edges by destination and recording corresponding offsets, supporting the fast access of the incoming edges for a given vertex.</p>
+</div>
+</section>
+</section>
+<section id="information-files">
+<h2>Information files<a class="headerlink" href="#information-files" title="Permalink to this headline">#</a></h2>
+<p>GraphAr uses two kinds of files to store a graph: a group of Yaml files to describe metadata information; and data files to store actual data for vertices and edges.
+A graph information file which named “&lt;name&gt;.graph.yml” describes the meta information for a graph whose name is &lt;name&gt;. The content of this file includes:</p>
+<ul class="simple">
+<li><p>the graph name;</p></li>
+<li><p>the root directory path of the data files;</p></li>
+<li><p>the vertex information and edge information files included;</p></li>
+<li><p>the version of GraphAr.</p></li>
+<li><p>extra information for the graph, could be used for user defined information.</p></li>
+</ul>
+<p>A vertex information file which named “&lt;label&gt;.vertex.yml” defines a single group of vertices with the same vertex label &lt;label&gt;, and all vertices in this group have the same schema. The file defines:</p>
+<ul class="simple">
+<li><p>the vertex label;</p></li>
+<li><p>the vertex chunk size;</p></li>
+<li><p>the relative path for vertex data files;</p></li>
+<li><p>the property groups attached: each property group has its own file type and the prefix for the path of its data files, it also lists all properties in this group, with every property containing its own name, data type, flagging of whether it is the primary key or not and flagging of whether it is nullable or not for non-primary key properties;</p></li>
+<li><p>the version of GraphAr.</p></li>
+</ul>
+<p>An edge information file which named “&lt;source label&gt;_&lt;edge label&gt;_&lt;destination label&gt;.edge.yml” defines a single group of edges with specific label for source vertex, destination vertex and the edge. It describes the meta information for these edges, includes:</p>
+<ul class="simple">
+<li><p>the source/edge/destination labels;</p></li>
+<li><p>the edge chunk size, the source vertex chunk size and the destination vertex chunk size;</p></li>
+<li><p>if the edges are directed or not;</p></li>
+<li><p>the relative path for edge data files;</p></li>
+<li><p>which kinds of adjList it includes: for each kind of adjList, the adjList type, the prefix of file path, the file type;</p></li>
+<li><p>the property groups attached to the edge for all adjLists;</p></li>
+<li><p>the version of GraphAr.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that GraphAr supports the storage of multiple types of adjLists for a given group of edges, e.g., a group of edges could be accessed in both CSR and CSC way when two copies (one is <strong>ordered_by_source</strong> and the other is <strong>ordered_by_dest</strong>) of the relevant data are present in GraphAr.</p>
+</div>
+<p>See also <a class="reference external" href="cpp/getting-started.html#gar-information-files">Gar Information Files</a> for an example.</p>
+</section>
+<section id="data-files">
+<h2>Data files<a class="headerlink" href="#data-files" title="Permalink to this headline">#</a></h2>
+<p>As previously mentioned, each logical vertex/edge table is divided into multiple physical tables stored in one of the following file formats:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://orc.apache.org/">Apache ORC</a></p></li>
+<li><p><a class="reference external" href="https://parquet.apache.org/">Apache Parquet</a></p></li>
+<li><p>CSV</p></li>
+<li><p>JSON</p></li>
+</ul>
+<p>Both of Apache ORC and Apache Parquet are column-oriented data storage formats. In practice of graph processing, it is common to only query a subset of columns of the properties. Thus, the column-oriented formats are more efficient, which eliminate the need to read columns that are not relevant. They are also used by a large number of data processing frameworks like <a class="reference external" href="https://spark.apache.org/">Apache Spark</a>, <a class="reference external" href="https://hive.apache.org/">Apache Hive</a>, <a class="reference external" href="https://flink.apache.org/">Apache Flink</a>, and <a class="reference external" href="https://hadoop.apache.org/">Apache Hadoop</a>.</p>
+<p>See also <a class="reference external" href="cpp/getting-started.html#gar-data-files">Gar Data Files</a> for an example.</p>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
+<p>The GraphAr libraries may implement part of the GraphAr format. The implementation status of the GraphAr libraries can refer to the <a class="reference external" href="status.html">GraphAr implementation status</a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="status.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Implementation Status</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../overview/concepts.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Concepts</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, The GraphAr Authors
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa fa-solid fa-github fa-2x" href="https://github.com/alibaba/GraphAr" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">GraphAr File Format</a><ul>
+<li><a class="reference internal" href="#property-graph">Property Graph</a></li>
+<li><a class="reference internal" href="#property-data-types">Property Data Types</a></li>
+<li><a class="reference internal" href="#configurations">Configurations</a><ul>
+<li><a class="reference internal" href="#vertex-chunk-size">Vertex Chunk Size</a></li>
+<li><a class="reference internal" href="#edge-chunk-size">Edge Chunk Size</a></li>
+<li><a class="reference internal" href="#data-file-format">Data File Format</a></li>
+<li><a class="reference internal" href="#adjacency-list-type">Adjacency List Type</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vertex-chunks-in-graphar">Vertex Chunks in GraphAr</a><ul>
+<li><a class="reference internal" href="#logical-table-of-vertices">Logical table of vertices</a></li>
+<li><a class="reference internal" href="#physical-table-of-vertices">Physical table of vertices</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#edge-chunks-in-graphar">Edge Chunks in GraphAr</a><ul>
+<li><a class="reference internal" href="#logical-table-of-edges">Logical table of edges</a></li>
+<li><a class="reference internal" href="#physical-table-of-edges">Physical table of edges</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#information-files">Information files</a></li>
+<li><a class="reference internal" href="#data-files">Data files</a></li>
+<li><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>

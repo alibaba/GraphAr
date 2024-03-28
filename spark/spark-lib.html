@@ -1,0 +1,574 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="GraphAr Spark Library" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="spark/spark-lib.html" />
+<meta property="og:site_name" content="GraphAr" />
+<meta property="og:description" content="Overview: The GraphAr Spark library is provided for generating, loading and transforming GAR files with Apache Spark easy. It consists of several components: Information Classes: As same with in th..." />
+<meta name="description" content="Overview: The GraphAr Spark library is provided for generating, loading and transforming GAR files with Apache Spark easy. It consists of several components: Information Classes: As same with in th..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Co-Work with Apache Spark" href="examples/spark.html" /><link rel="prev" title="Spark Library" href="index.html" />
+
+    <link rel="shortcut icon" href="../_static/graphar.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+        <title>GraphAr Spark Library - GraphAr</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/brands.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/v4-shims.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/panels.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+  <script>
+    document.body.dataset.theme = "light";
+  </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GraphAr</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">GraphAr</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Format Specification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../format/file-format.html">File Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format/status.html">Implementation Status</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cpp/index.html">C++</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp/getting-started.html">Getting Started</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cpp/examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/bgl.html">Co-Work with BGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/graphscope.html">Integrate into GraphScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/out-of-core.html">Out-of-core Graph Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/examples/snap-to-graphar.html">Convert SNAP Datasets to GraphAr Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../java/index.html">Java</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../java/java-lib.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../java/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Spark</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/spark.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pyspark/index.html">PySpark</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pyspark/pyspark-lib.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyspark/how-to.html">How to use</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pyspark/api/modules.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pyspark/api/graphar_pyspark.html">graphar_pyspark package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/contributing.html">Contributing Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/java-dev.html">Java Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/community.html">Community</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/alibaba/GraphAr/edit/main/docs/spark/spark-lib.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="graphar-spark-library">
+<h1>GraphAr Spark Library<a class="headerlink" href="#graphar-spark-library" title="Permalink to this headline">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
+<p>The GraphAr Spark library is provided for generating, loading and transforming GAR files with Apache Spark easy. It consists of several components:</p>
+<ul class="simple">
+<li><p><strong>Information Classes</strong>: As same with in the C++ library, the information classes are implemented as a part of the Spark library for constructing and accessing the meta information about the graphs, vertices and edges in GraphAr.</p></li>
+<li><p><strong>IndexGenerator</strong>: The IndexGenerator helps to generate the indices for vertex/edge DataFrames. In most cases, IndexGenerator is first utilized to generate the indices for a DataFrame (e.g., from primary keys), and then this DataFrame can be written into GAR files through the writer.</p></li>
+<li><p><strong>Writer</strong>: The GraphAr Spark writer provides a set of interfaces that can be used to write Spark DataFrames into GAR files. Every time it takes a DataFrame as the logical table for a type of vertices or edges, assembles the data in specified format (e.g., reorganize the edges in the CSR way) and then dumps it to standard GAR files (CSV, ORC or Parquet files) under the specific directory path.</p></li>
+<li><p><strong>Reader</strong>: The GraphAr Spark reader provides a set of interfaces that can be used to read GAR files. It reads a collection of vertices or edges at a time and assembles the result into the Spark DataFrame. Similar with the reader in the C++ library, it supports the users to specify the data they need, e.g., reading a single property group instead of all properties.</p></li>
+</ul>
+</section>
+<section id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">#</a></h2>
+<p>The GraphAr Spark library can be used in a range of scenarios:</p>
+<ul class="simple">
+<li><p>Taking GAR as a data source to execute SQL queries or do graph processing (e.g., using GraphX).</p></li>
+<li><p>Transforming data between GAR and other data sources (e.g., Hive, Neo4j, NebulaGraph, …).</p></li>
+<li><p>Transforming GAR data between different file types (e.g., from ORC to Parquet).</p></li>
+<li><p>Transforming GAR data between different adjList types (e.g., from COO to CSR).</p></li>
+<li><p>Modifying existing GAR data (e.g., adding new vertices/edges).</p></li>
+</ul>
+<p>For more information on its usage, please refer to the <a class="reference external" href="examples/spark.html">Examples</a>.</p>
+</section>
+<section id="get-graphar-spark-library">
+<h2>Get GraphAr Spark Library<a class="headerlink" href="#get-graphar-spark-library" title="Permalink to this headline">#</a></h2>
+<section id="building-from-source">
+<h3>Building from source<a class="headerlink" href="#building-from-source" title="Permalink to this headline">#</a></h3>
+<p>Make the graphar-spark-library directory as the current working directory:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>GraphAr/spark/
+</pre></div>
+</div>
+<p>Compile package:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>-DskipTests
+</pre></div>
+</div>
+<p>GraphAr supports two Apache Spark versions for now and uses Maven Profiles to work with it. The command above built GrahpAr with Spark 3.2.2 by default. To built GraphAr with Spark 3.3.4 use the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>-DskipTests<span class="w"> </span>-P<span class="w"> </span>datasources-33
+</pre></div>
+</div>
+<p>After compilation, a similar file <em>graphar-x.x.x-SNAPSHOT-shaded.jar</em> is generated in the directory <em>spark/graphar/target/</em>.</p>
+<p>Please refer to the <a class="reference external" href="https://github.com/alibaba/GraphAr/tree/main/spark">building steps</a> for more details.</p>
+</section>
+<section id="get-from-maven">
+<h3>Get from Maven<a class="headerlink" href="#get-from-maven" title="Permalink to this headline">#</a></h3>
+<p>You can include GraphAr as a dependency in your maven project</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&lt;repositories&gt;
+<span class="w">   </span>&lt;repository&gt;
+<span class="w">      </span>&lt;id&gt;graphar-mvn-repo&lt;/id&gt;
+<span class="w">      </span>&lt;url&gt;https://github.com/alibaba/GraphAr/raw/mvn-repo/&lt;/url&gt;
+<span class="w">   </span>&lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;dependencies&gt;
+<span class="w">   </span>&lt;dependency&gt;
+<span class="w">      </span>&lt;groupId&gt;org.apache&lt;/groupId&gt;
+<span class="w">      </span>&lt;artifactId&gt;graphar&lt;/artifactId&gt;
+<span class="w">      </span>&lt;version&gt;0.1.0&lt;/version&gt;
+<span class="w">   </span>&lt;/dependency&gt;
+&lt;/dependencies&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="how-to-use">
+<h2>How to Use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">#</a></h2>
+<section id="information-classes">
+<h3>Information classes<a class="headerlink" href="#information-classes" title="Permalink to this headline">#</a></h3>
+<p>The Spark library for GraphAr provides distinct information classes for constructing and accessing meta information about graphs, vertices, and edges. These classes act as essential parameters for constructing readers and writers, and they can be built either from the existing meta files (in the Yaml format) or in-memory from scratch.</p>
+<p>To construct information from a Yaml file, please refer to the following example code.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// read graph yaml and construct information</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">spark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="c1">// the Spark session</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="c1">// the path to the yaml file</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">graph_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GraphInfo</span><span class="p">.</span><span class="n">loadGraphInfo</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+
+<span class="c1">// use information classes</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph_info</span><span class="p">.</span><span class="n">getVertices</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph_info</span><span class="p">.</span><span class="n">getEdges</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph_info</span><span class="p">.</span><span class="n">getVersion</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TestGraphInfo.scala">TestGraphInfo.scala</a> for the complete example.</p>
+</section>
+<section id="indexgenerator">
+<h3>IndexGenerator<a class="headerlink" href="#indexgenerator" title="Permalink to this headline">#</a></h3>
+<p>The GraphAr file format assigns each vertex with a unique index inside the vertex type (which called internal vertex id) starting from 0 and increasing continuously for each type of vertex (i.e., with the same vertex label). However, the vertex/edge tables in Spark often lack this information, requiring special attention. For example, an edge table typically uses the primary key (e.g., “id”, which is a string) to identify its source and destination vertices.</p>
+<p>To address this issue, the GraphAr Spark library offers the IndexGenerator which is used to generate indices for vertex/edge DataFrames. For a vertex DataFrame, a mapping from the primary keys to GAR indices can be constructed, or an index column can be generated directly if no primary keys are available. For an edge DataFrame, source and destination columns can be generated from the vertex index mapping (when the end vertices are represented by the primary keys), or they may be generated directly without the mapping.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In most cases, IndexGenerator is first utilized to generate the indices for a DataFrame, and then this DataFrame can be written into GAR files through the writer.</p>
+</div>
+<p>To utilize IndexGenerator, please refer to the following example code.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// generate indices for vertex DataFrame</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_df_with_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IndexGenerator</span><span class="p">.</span><span class="n">generateVertexIndexColumn</span><span class="p">(</span><span class="n">vertex_df</span><span class="p">)</span>
+
+<span class="c1">// generate indices for src &amp; dst columns of edge DataFrame</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_df_with_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IndexGenerator</span><span class="p">.</span><span class="n">generateSrcAndDstIndexUnitedlyForEdges</span><span class="p">(</span><span class="n">edge_df</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;src&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dst&quot;</span><span class="p">)</span>
+
+<span class="c1">// generate indices for src &amp; dst columns of edge DataFrame from vertex primary keys</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_mapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IndexGenerator</span><span class="p">.</span><span class="n">constructVertexIndexMapping</span><span class="p">(</span><span class="n">vertex_df</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_df_src_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IndexGenerator</span><span class="p">.</span><span class="n">generateSrcIndexForEdgesFromMapping</span><span class="p">(</span><span class="n">edge_df</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;src&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">vertex_mapping</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_df_src_dst_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IndexGenerator</span><span class="p">.</span><span class="n">generateDstIndexForEdgesFromMapping</span><span class="p">(</span><span class="n">edge_df_src_index</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dst&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">vertex_mapping</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TestIndexGenerator.scala">TestIndexGenerator.scala</a> for the complete example.</p>
+</section>
+<section id="writer">
+<h3>Writer<a class="headerlink" href="#writer" title="Permalink to this headline">#</a></h3>
+<p>The GraphAr Spark writer provides the necessary Spark interfaces to write DataFrames into GraphAr formatted files in a batch-import fashion. With the VertexWriter, users can specify a particular property group to be written into its corresponding chunks, or choose to write all property groups. For edge chunks, besides the meta data (edge info), the adjList type should also be specified. The adjList/properties can be written alone, or alternatively, all adjList, properties, and the offset (for CSR and CSC format) chunks can be written simultaneously.</p>
+<p>To utilize the GAR Spark writer, please refer to the following example code.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// generate the vertex index column for vertex DataFrame</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_df_with_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IndexGenerator</span><span class="p">.</span><span class="n">generateVertexIndexColumn</span><span class="p">(</span><span class="n">vertex_df</span><span class="p">)</span>
+<span class="c1">// construct the vertex writer</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">VertexWriter</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">vertex_info</span><span class="p">,</span><span class="w"> </span><span class="n">vertex_df_with_index</span><span class="p">)</span>
+<span class="c1">// write certain property group</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">property_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex_info</span><span class="p">.</span><span class="n">getPropertyGroup</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<span class="n">writer</span><span class="p">.</span><span class="n">writeVertexProperties</span><span class="p">(</span><span class="n">property_group</span><span class="p">)</span>
+<span class="c1">// write all properties</span>
+<span class="n">writer</span><span class="p">.</span><span class="n">writeVertexProperties</span><span class="p">()</span>
+
+<span class="c1">// generate vertex index for edge DataFrame</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_df_with_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IndexGenerator</span><span class="p">.</span><span class="n">generateSrcAndDstIndexUnitedlyForEdges</span><span class="p">(</span><span class="n">edge_df</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;src&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dst&quot;</span><span class="p">)</span>
+<span class="c1">// construct the edge writer</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">adj_list_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AdjListType</span><span class="p">.</span><span class="n">ordered_by_source</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">EdgeWriter</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">edge_info</span><span class="p">,</span><span class="w"> </span><span class="n">adj_list_type</span><span class="p">,</span><span class="w"> </span><span class="n">edge_df_with_index</span><span class="p">)</span>
+<span class="c1">// write adjList</span>
+<span class="n">writer</span><span class="p">.</span><span class="n">writeAdjList</span><span class="p">()</span>
+<span class="c1">// write certain property group</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">property_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edge_info</span><span class="p">.</span><span class="n">getPropertyGroup</span><span class="p">(</span><span class="s">&quot;creationDate&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">adj_list_type</span><span class="p">)</span>
+<span class="n">writer</span><span class="p">.</span><span class="n">writeEdgeProperties</span><span class="p">(</span><span class="n">property_group</span><span class="p">)</span>
+<span class="c1">// write all of adjList and properties</span>
+<span class="n">writer</span><span class="p">.</span><span class="n">writeEdges</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TestWriter.scala">TestWriter.scala</a> for the complete example.</p>
+</section>
+<section id="reader">
+<h3>Reader<a class="headerlink" href="#reader" title="Permalink to this headline">#</a></h3>
+<p>The GraphAr Spark reader provides an extensive set of interfaces to read GAR files. It reads a collection of vertices or edges at a time and assembles the result into the Spark DataFrame. Similar with the reader in C++ library, it supports the users to specify the data they need, e.g., a single property group.</p>
+<p>After content has been read into the Spark DataFrame, users can leverage it to do graph processing, execute SQL queries or perform various transformations (such as adding new vertices/edges, reorganizing the edge order, and changing the file type) and then write it back into GAR files if desired.</p>
+<p>To utilize the GAR Spark reader, please refer to the following example code.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct the vertex reader</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">VertexReader</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">vertex_info</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">property_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex_info</span><span class="p">.</span><span class="n">getPropertyGroup</span><span class="p">(</span><span class="s">&quot;gender&quot;</span><span class="p">)</span>
+<span class="c1">// read a single chunk</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">single_chunk_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">readVertexPropertyChunk</span><span class="p">(</span><span class="n">property_group</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">// ...</span>
+<span class="c1">// read all property chunks</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">vertex_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">readAllVertexPropertyGroups</span><span class="p">()</span>
+
+<span class="c1">//construct the edge reader</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">adj_list_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AdjListType</span><span class="p">.</span><span class="n">ordered_by_source</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">EdgeReader</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">edge_info</span><span class="p">,</span><span class="w"> </span><span class="n">adj_list_type</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+<span class="c1">// read a single adjList chunk</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">single_adj_list_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">readAdjListChunk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">// read all adjList chunks for a vertex chunk</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">adj_list_df_chunk_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">readAdjListForVertexChunk</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">// ...</span>
+<span class="c1">// read all edge chunks (including adjList and all properties)</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">edge_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">readEdges</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TestReader.scala">TestReader.scala</a> for the complete example.</p>
+</section>
+<section id="graph-level-apis">
+<h3>Graph-level APIs<a class="headerlink" href="#graph-level-apis" title="Permalink to this headline">#</a></h3>
+<p>To improve the usability of the GraphAr Spark library, a set of APIs are provided to allow users to easily perform operations such as reading, writing, and transforming data at the graph level. These APIs are fairly easy to use, while the previous methods of using reader, writer and information classes are more flexibly and can be highly customized.</p>
+<p>The Graph Reader is a helper object which enables users to read all the chunk files from GraphAr for a single graph. The only input required is a GraphInfo object or the path to the information yaml file. On successful completion, it returns a set of vertex DataFrames and edge DataFrames, each of which can be accessed by specifying the vertex/edge label. The Graph Writer is used for writing all vertex DataFrames and edge DataFrames of a graph to generate GraphAr chunk files. For more details, please refer to the <a class="reference external" href="../reference/spark-api/index.html">API Reference</a> .</p>
+<p>The Graph Transformer is a helper object in the GraphAr Spark library, designed to assist with data transformation at the graph level. It takes two GraphInfo objects (or paths of two yaml files) as inputs: one for the source graph, and one for the destination graph. The transformer will then load data from existing GAR files for the source graph, utilizing the GraphAr Spark Reader and the meta data defined in the source GraphInfo. After reorganizing the data according to the destination GraphInfo, it generates new GAR chunk files with the GraphAr Spark Writer.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// transform graphs by yaml paths</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">spark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="c1">// the Spark session</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">source_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="c1">// e.g., /tmp/source.graph.yml</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">dest_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="c1">// e.g., /tmp/dest.graph.yml</span>
+<span class="nc">GraphTransformer</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span><span class="w"> </span><span class="n">dest_path</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+
+<span class="c1">// transform graphs by information objects</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">source_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">dest_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
+<span class="nc">GraphTransformer</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source_info</span><span class="p">,</span><span class="w"> </span><span class="n">dest_info</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We provide an example in <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TestGraphTransformer.scala">TestGraphTransformer.scala</a>, which demonstrates how to conduct data transformation from the <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/ldbc_sample/parquet/ldbc_sample.graph.yml">source graph</a> to the <a class="reference external" href="https://github.com/GraphScope/gar-test/blob/main/transformer/ldbc_sample.graph.yml">destination graph</a>.</p>
+<p>The Graph Transformer can be used for various purposes, including transforming GAR data between different file types (e.g. from ORC to Parquet), transforming between different adjList types (e.g. from COO to CSR), selecting properties or regrouping them, and setting a new chunk size.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are certain limitations while using the Graph Transformer:</p>
+<ul class="simple">
+<li><p>The vertices (or edges) of the source and destination graphs are aligned by labels, meaning each vertex/edge label included in the destination graph must have an equivalent in the source graph, in order for the related chunks to be loaded as the data source.</p></li>
+<li><p>For each group of vertices/edges (i.e., each single label), each property included in the destination graph (defined in the relevant VertexInfo/EdgeInfo) must also be present in the source graph.</p></li>
+</ul>
+<p>In addition, users can use the GraphAr Spark Reader/Writer to conduct data transformation more flexibly at the vertex/edge table level, as opposed to the graph level. This allows for a more granular approach to transforming data, as <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TransformExample.scala">TransformExample.scala</a> shows.</p>
+</div>
+</section>
+<section id="more-examples">
+<h3>More examples<a class="headerlink" href="#more-examples" title="Permalink to this headline">#</a></h3>
+<p>For more information on usage, please refer to the examples:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/ComputeExample.scala">ComputeExample.scala</a>  includes an example for constructing the GraphX graph from GAR files and executing a connected-components computation.</p></li>
+<li><p><a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/test/scala/com/alibaba/graphar/TransformExample.scala">TransformExample.scala</a> shows an example for graph data conversion between different file types or different adjList types.</p></li>
+<li><p><a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/main/scala/com/alibaba/graphar/example/Neo4j2GraphAr.scala">Neo4j2GraphAr.scala</a> and <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/spark/src/main/scala/com/alibaba/graphar/example/GraphAr2Neo4j.scala">GraphAr2Neo4j.scala</a> are examples to conduct data importing/exporting for Neo4j.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="examples/spark.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Co-Work with Apache Spark</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Spark Library</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, The GraphAr Authors
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa fa-solid fa-github fa-2x" href="https://github.com/alibaba/GraphAr" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">GraphAr Spark Library</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+<li><a class="reference internal" href="#get-graphar-spark-library">Get GraphAr Spark Library</a><ul>
+<li><a class="reference internal" href="#building-from-source">Building from source</a></li>
+<li><a class="reference internal" href="#get-from-maven">Get from Maven</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-use">How to Use</a><ul>
+<li><a class="reference internal" href="#information-classes">Information classes</a></li>
+<li><a class="reference internal" href="#indexgenerator">IndexGenerator</a></li>
+<li><a class="reference internal" href="#writer">Writer</a></li>
+<li><a class="reference internal" href="#reader">Reader</a></li>
+<li><a class="reference internal" href="#graph-level-apis">Graph-level APIs</a></li>
+<li><a class="reference internal" href="#more-examples">More examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>

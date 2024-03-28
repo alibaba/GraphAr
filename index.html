@@ -1,0 +1,495 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="What is GraphAr?" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="index.html" />
+<meta property="og:site_name" content="GraphAr" />
+<meta property="og:description" content="GraphAr CI Docs CI GraphAr Docs Good First Issue 📢 Join our Weekly Community Meeting to learn more about GraphAr and get involved!, Overview, Graph processing serves as the essential building block..." />
+<meta name="description" content="GraphAr CI Docs CI GraphAr Docs Good First Issue 📢 Join our Weekly Community Meeting to learn more about GraphAr and get involved!, Overview, Graph processing serves as the essential building block..." />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Overview" href="overview/overview.html" />
+
+    <link rel="shortcut icon" href="_static/graphar.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+        <title>GraphAr</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="_static/css/brands.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/v4-shims.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/panels.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+  <script>
+    document.body.dataset.theme = "light";
+  </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">GraphAr</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  
+  <span class="sidebar-brand-text">GraphAr</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview/motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Format Specification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="format/file-format.html">File Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="format/status.html">Implementation Status</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Libraries</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cpp/index.html">C++</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="cpp/getting-started.html">Getting Started</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="cpp/examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="cpp/examples/bgl.html">Co-Work with BGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpp/examples/graphscope.html">Integrate into GraphScope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpp/examples/out-of-core.html">Out-of-core Graph Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpp/examples/snap-to-graphar.html">Convert SNAP Datasets to GraphAr Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cpp/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="java/index.html">Java</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="java/java-lib.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="java/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="spark/index.html">Spark</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="spark/spark-lib.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/examples/spark.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/reference/index.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyspark/index.html">PySpark</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyspark/pyspark-lib.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyspark/how-to.html">How to use</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyspark/api/modules.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyspark/api/graphar_pyspark.html">graphar_pyspark package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developers/contributing.html">Contributing Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers/java-dev.html">Java Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers/community.html">Community</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/alibaba/GraphAr/edit/main/docs/index.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1 align="center" style="clear: both;">
+    <img src="https://alibaba.github.io/GraphAr/_static/graphar-logo.svg" width="350" alt="GraphAr">
+</h1>
+<p align="center">
+    An open source, standard data file format for graph data storage and retrieval
+</p><p><a class="reference external" href="https://github.com/alibaba/GraphAr/actions"><img alt="GraphAr CI" src="https://github.com/alibaba/GraphAr/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/alibaba/GraphAr/actions"><img alt="Docs CI" src="https://github.com/alibaba/GraphAr/actions/workflows/docs.yml/badge.svg" /></a> <a class="reference external" href="https://alibaba.github.io/GraphAr/"><img alt="GraphAr Docs" src="https://img.shields.io/badge/docs-latest-brightgreen.svg" /></a> <a class="reference external" href="https://github.com/alibaba/GraphAr/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22"><img alt="Good First Issue" src="https://img.shields.io/github/labels/alibaba/GraphAr/Good%20First%20Issue?color=green&amp;label=Contribute%20&amp;style=plastic" /></a></p>
+<p>📢 Join our <a class="reference external" href="https://github.com/alibaba/GraphAr/wiki/GraphAr-Weekly-Community-Meeting">Weekly Community Meeting</a> to learn more about GraphAr and get involved!</p>
+<section id="what-is-graphar">
+<h1>What is GraphAr?<a class="headerlink" href="#what-is-graphar" title="Permalink to this headline">#</a></h1>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="https://alibaba.github.io/GraphAr/_images/overview.png"><img alt="Overview" class="align-center" src="https://alibaba.github.io/GraphAr/_images/overview.png" style="width: 770px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Graph processing serves as the essential building block for a diverse variety of
+real-world applications such as social network analytics, data mining, network routing,
+and scientific computing.</p>
+<p>GraphAr (short for “Graph Archive”) is a project that aims to make it easier for diverse applications and
+systems (in-memory and out-of-core storages, databases, graph computing systems, and interactive graph query frameworks)
+to build and access graph data conveniently and efficiently.</p>
+<p>It can be used for importing/exporting and persistent storage of graph data,
+thereby reducing the burden on systems when working together. Additionally, it can
+serve as a direct data source for graph processing applications.</p>
+<p>To achieve this, GraphAr provides:</p>
+<ul class="simple">
+<li><p>The Graph Archive(GAR) file format: a standardized system-independent file format for storing graph data</p></li>
+<li><p>Libraries: a set of libraries for reading, writing and transforming GAR files</p></li>
+</ul>
+<p>By using GraphAr, you can:</p>
+<ul class="simple">
+<li><p>Store and persist your graph data in a system-independent way with the GAR file format</p></li>
+<li><p>Easily access and generate GAR files using the libraries</p></li>
+<li><p>Utilize Apache Spark to quickly manipulate and transform your GAR files</p></li>
+</ul>
+</section>
+<section id="the-gar-file-format">
+<h1>The GAR File Format<a class="headerlink" href="#the-gar-file-format" title="Permalink to this headline">#</a></h1>
+<p>The GAR file format is designed for storing property graphs. It uses metadata to
+record all the necessary information of a graph, and maintains the actual data in
+a chunked way.</p>
+<p>A property graph consists of vertices and edges, with each vertex contains a unique identifier and:</p>
+<ul class="simple">
+<li><p>A text label that describes the vertex type.</p></li>
+<li><p>A collection of properties, with each property can be represented by a key-value pair.</p></li>
+</ul>
+<p>Each edge contains a unique identifier and:</p>
+<ul class="simple">
+<li><p>The outgoing vertex (source).</p></li>
+<li><p>The incoming vertex (destination).</p></li>
+<li><p>A text label that describes the relationship between the two vertices.</p></li>
+<li><p>A collection of properties.</p></li>
+</ul>
+<p>The following is an example property graph containing two types of vertices (“person” and “comment”) and three types of edges.</p>
+<a class="reference internal image-reference" href="https://alibaba.github.io/GraphAr/_images/property_graph.png"><img alt="property graph" class="align-center" src="https://alibaba.github.io/GraphAr/_images/property_graph.png" style="width: 700px;" /></a>
+<section id="vertices-in-graphar">
+<h2>Vertices in GraphAr<a class="headerlink" href="#vertices-in-graphar" title="Permalink to this headline">#</a></h2>
+<section id="logical-table-of-vertices">
+<h3>Logical table of vertices<a class="headerlink" href="#logical-table-of-vertices" title="Permalink to this headline">#</a></h3>
+<p>Each type of vertices (with the same label) constructs a logical vertex table, with each vertex assigned with a global index inside this type (called internal vertex id) starting from 0, corresponding to the row number of the vertex in the logical vertex table. An example layout for a logical table of vertices under the label “person” is provided for reference.</p>
+<p>Given an internal vertex id and the vertex label, a vertex is uniquely identifiable and its respective properties can be accessed from this table. The internal vertex id is further used to identify the source and destination vertices when maintaining the topology of the graph.</p>
+<a class="reference internal image-reference" href="https://alibaba.github.io/GraphAr/_images/vertex_logical_table.png"><img alt="vertex logical table" class="align-center" src="https://alibaba.github.io/GraphAr/_images/vertex_logical_table.png" style="width: 650px;" /></a>
+</section>
+<section id="physical-table-of-vertices">
+<h3>Physical table of vertices<a class="headerlink" href="#physical-table-of-vertices" title="Permalink to this headline">#</a></h3>
+<p>The logical vertex table will be partitioned into multiple continuous vertex chunks for enhancing the reading/writing efficiency. To maintain the ability of random access, the size of vertex chunks for the same label is fixed. To support to access required properties avoiding reading all properties from the files, and to add properties for vertices without modifying the existing files, the columns of the logical table will be divided into several column groups.</p>
+<p>Take the “person” vertex table as an example, if the chunk size is set to be 500, the logical table will be separated into sub-logical-tables of 500 rows with the exception of the last one, which may have less than 500 rows. The columns for maintaining properties will also be divided into distinct groups (e.g., 2 for our example). As a result, a total of 4 physical vertex tables are created for storing the example logical table, which can be seen from the following figure.</p>
+<a class="reference internal image-reference" href="https://alibaba.github.io/GraphAr/_images/vertex_physical_table.png"><img alt="vertex physical table" class="align-center" src="https://alibaba.github.io/GraphAr/_images/vertex_physical_table.png" style="width: 650px;" /></a>
+<p><strong>Note</strong>: For efficiently utilize the filter push-down of the payload file format like Parquet, the internal vertex id is stored in the payload file as a column. And since the internal vertex id is continuous, the payload file format can use the delta encoding for the internal vertex id column, which would not bring too much overhead for the storage.</p>
+</section>
+</section>
+<section id="edges-in-graphar">
+<h2>Edges in GraphAr<a class="headerlink" href="#edges-in-graphar" title="Permalink to this headline">#</a></h2>
+<section id="logical-table-of-edges">
+<h3>Logical table of edges<a class="headerlink" href="#logical-table-of-edges" title="Permalink to this headline">#</a></h3>
+<p>For maintaining a type of edges (that with the same triplet of the source label, edge label, and destination label), a logical edge table is established.  And in order to support quickly creating a graph from the graph storage file, the logical edge table could maintain the topology information in a way similar to CSR/CSC (learn more about <a class="reference external" href="https://en.wikipedia.org/wiki/Sparse_matrix">CSR/CSC</a>), that is, the edges are ordered by the internal vertex id of either source or destination. In this way, an offset table is required to store the start offset for each vertex’s edges, and the edges with the same source/destination will be stored continuously in the logical table.</p>
+<p>Take the logical table for “person knows person” edges as an example, the logical edge table looks like:</p>
+<a class="reference internal image-reference" href="https://alibaba.github.io/GraphAr/_images/edge_logical_table.png"><img alt="edge logical table" class="align-center" src="https://alibaba.github.io/GraphAr/_images/edge_logical_table.png" style="width: 650px;" /></a>
+</section>
+<section id="physical-table-of-edges">
+<h3>Physical table of edges<a class="headerlink" href="#physical-table-of-edges" title="Permalink to this headline">#</a></h3>
+<p>As same with the vertex table, the logical edge table is also partitioned into some sub-logical-tables, with each sub-logical-table contains edges that the source (or destination) vertices are in the same vertex chunk. According to the partition strategy and the order of the edges, edges can be stored in GraphAr following one of the four types:</p>
+<ul class="simple">
+<li><p><strong>ordered_by_source</strong>: all the edges in the logical table are ordered and further partitioned by the internal vertex id of the source, which can be seen as the CSR format.</p></li>
+<li><p><strong>ordered_by_dest</strong>: all the edges in the logical table are ordered and further partitioned by the internal vertex id of the destination, which can be seen as the CSC format.</p></li>
+<li><p><strong>unordered_by_source</strong>: the internal id of the source vertex is used as the partition key to divide the edges into different sub-logical-tables, and the edges in each sub-logical-table are unordered, which can be seen as the COO format.</p></li>
+<li><p><strong>unordered_by_dest</strong>: the internal id of the destination vertex is used as the partition key to divide the edges into different sub-logical-tables, and the edges in each sub-logical-table are unordered, which can also be seen as the COO format.</p></li>
+</ul>
+<p>After that, a sub-logical-table is further divided into edge chunks of a predefined, fixed number of rows (referred to as edge chunk size). Finally, an edge chunk is separated into physical tables in the following way:</p>
+<ul class="simple">
+<li><p>an adjList table (which contains only two columns: the internal vertex id of the source and the destination).</p></li>
+<li><p>0 or more edge property tables, with each table contains a group of properties.</p></li>
+</ul>
+<p>Additionally, there would be an offset table for <strong>ordered_by_source</strong> or <strong>ordered_by_dest</strong> edges. The offset table is used to record the starting point of the edges for each vertex. The partition of the offset table should be in alignment with the partition of the corresponding vertex table. The first row of each offset chunk is always 0, indicating the starting point for the corresponding sub-logical-table for edges.</p>
+<p>Take the “person knows person” edges to illustrate. Suppose the vertex chunk size is set to 500 and the edge chunk size is 1024, and the edges are <strong>ordered_by_source</strong>, then the edges could be saved in the following physical tables:</p>
+<a class="reference internal image-reference" href="https://alibaba.github.io/GraphAr/_images/edge_physical_table1.png"><img alt="edge logical table1" class="align-center" src="https://alibaba.github.io/GraphAr/_images/edge_physical_table1.png" style="width: 650px;" /></a>
+<a class="reference internal image-reference" href="https://alibaba.github.io/GraphAr/_images/edge_physical_table2.png"><img alt="edge logical table2" class="align-center" src="https://alibaba.github.io/GraphAr/_images/edge_physical_table2.png" style="width: 650px;" /></a>
+</section>
+</section>
+</section>
+<section id="building-libraries">
+<h1>Building Libraries<a class="headerlink" href="#building-libraries" title="Permalink to this headline">#</a></h1>
+<p>GraphAr offers a collection of libraries for the purpose of reading, writing and transforming files.
+Currently, the following libraries are available, and plans are in place to expand support to additional programming language.</p>
+<section id="the-c-library">
+<h2>The C++ Library<a class="headerlink" href="#the-c-library" title="Permalink to this headline">#</a></h2>
+<p>See <a class="reference external" href="https://github.com/alibaba/GraphAr/tree/main/cpp">GraphAr C++ Library</a> for details about the building of the C++ library.</p>
+</section>
+<section id="the-java-library">
+<h2>The Java Library<a class="headerlink" href="#the-java-library" title="Permalink to this headline">#</a></h2>
+<p>The GraphAr Java library is created with bindings to the C++ library (currently at version v0.10.0), utilizing  <a class="reference external" href="https://github.com/alibaba/fastFFI">Alibaba-FastFFI</a> for implementation.
+See <a class="reference external" href="https://github.com/alibaba/GraphAr/tree/main/java">GraphAr Java Library</a> for details about the building of the Java library.</p>
+</section>
+<section id="the-spark-library">
+<h2>The Spark Library<a class="headerlink" href="#the-spark-library" title="Permalink to this headline">#</a></h2>
+<p>See <a class="reference external" href="https://github.com/alibaba/GraphAr/tree/main/spark">GraphAr Spark Library</a> for details about the Spark library.</p>
+</section>
+<section id="the-pyspark-library">
+<h2>The PySpark Library<a class="headerlink" href="#the-pyspark-library" title="Permalink to this headline">#</a></h2>
+<p>The GraphAr PySpark library is developed as bindings to the GraphAr Spark library.
+See <a class="reference external" href="https://github.com/alibaba/GraphAr/tree/main/pyspark">GraphAr PySpark Library</a> for details about the PySpark library.</p>
+</section>
+</section>
+<section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h1>
+<section id="contributing-guidelines">
+<h2>Contributing Guidelines<a class="headerlink" href="#contributing-guidelines" title="Permalink to this headline">#</a></h2>
+<p>Read through our <a class="reference external" href="https://github.com/alibaba/GraphAr/tree/main/CONTRIBUTING.rst">contribution guidelines</a> to learn about our submission process, coding rules, and more.</p>
+</section>
+<section id="code-of-conduct">
+<h2>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Permalink to this headline">#</a></h2>
+<p>Help us keep GraphAr open and inclusive. Please read and follow our <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>.</p>
+</section>
+</section>
+<section id="getting-involved">
+<h1>Getting Involved<a class="headerlink" href="#getting-involved" title="Permalink to this headline">#</a></h1>
+<p>Join the conversation and help the community. Even if you do not plan to contribute
+to GraphAr itself or GraphAr integrations in other projects, we’d be happy to have you involved.</p>
+<ul class="simple">
+<li><p>Ask questions on <a class="reference external" href="https://github.com/alibaba/GraphAr/discussions">GitHub Discussions</a>. We welcome all kinds of questions, from beginner to advanced!</p></li>
+<li><p>Follow our activity and ask for feature requests on <a class="reference external" href="https://github.com/alibaba/GraphAr/issues/new">GitHub Issues</a>.</p></li>
+<li><p>Join our <a class="reference external" href="https://github.com/alibaba/GraphAr/wiki/GraphAr-Weekly-Community-Meeting">Weekly Community Meeting</a>.</p></li>
+</ul>
+<p>Read through our <a class="reference external" href="https://github.com/alibaba/GraphAr/tree/main/docs/developers/community.rst">community introduction</a> to learn about our communication channels, governance, and more.</p>
+</section>
+<section id="license">
+<h1>License<a class="headerlink" href="#license" title="Permalink to this headline">#</a></h1>
+<p><strong>GraphAr</strong> is distributed under <a class="reference external" href="https://github.com/alibaba/GraphAr/blob/main/LICENSE">Apache License 2.0</a>. Please note that
+third-party libraries may not have the same license as GraphAr.</p>
+</section>
+<section id="publication">
+<h1>Publication<a class="headerlink" href="#publication" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Xue Li, Weibin Zeng, Zhibin Wang, Diwen Zhu, Jingbo Xu, Wenyuan Yu, Jingren Zhou.
+<a class="reference external" href="https://arxiv.org/abs/2312.09577">Enhancing Data Lakes with GraphAr: Efficient Graph Data Management with a Specialized Storage Scheme[J]</a>.
+arXiv preprint arXiv:2312.09577, 2023.</p></li>
+</ul>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">li2023enhancing</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Xue Li and Weibin Zeng and Zhibin Wang and Diwen Zhu and Jingbo Xu and Wenyuan Yu and Jingren Zhou}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Enhancing Data Lakes with GraphAr: Efficient Graph Data Management with a Specialized Storage Scheme}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2023}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://doi.org/10.48550/arXiv.2312.09577}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10.48550/ARXIV.2312.09577}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">eprinttype</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{arXiv}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">eprint</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2312.09577}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">biburl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://dblp.org/rec/journals/corr/abs-2312-09577.bib}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">bibsource</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{dblp computer science bibliography, https://dblp.org}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="overview/overview.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Overview</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, The GraphAr Authors
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa fa-solid fa-github fa-2x" href="https://github.com/alibaba/GraphAr" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>
