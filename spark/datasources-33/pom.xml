@@ -72,7 +72,7 @@
                 <configuration>
                     <scalaVersion>${scala.version}</scalaVersion>
                     <args>
-                        <arg>-target:jvm-1.8</arg>
+                        <arg>-target:jvm-11</arg>
                     </args>
                     <jvmArgs>
                         <jvmArg>-Xss4096K</jvmArg>

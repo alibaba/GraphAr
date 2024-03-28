@@ -1,30 +1,36 @@
 /*
- * Copyright 2022-2023 Alibaba Group Holding Limited.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
-package com.alibaba.graphar.info;
+package org.apache.graphar.info;
 
-import com.alibaba.graphar.info.type.AdjListType;
-import com.alibaba.graphar.info.type.DataType;
-import com.alibaba.graphar.info.yaml.EdgeYamlParser;
+import org.apache.graphar.info.type.AdjListType;
+import org.apache.graphar.info.type.DataType;
+import org.apache.graphar.info.yaml.EdgeYamlParser;
+import org.apache.graphar.util.GeneralParams;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
@@ -34,7 +40,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 public class EdgeInfo {
-    private final EdgeTriple edgeTriple;
+    private final EdgeTriplet edgeTriplet;
     private final long chunkSize;
     private final long srcChunkSize;
     private final long dstChunkSize;
@@ -48,15 +54,15 @@ public class EdgeInfo {
             String srcLabel,
             String edgeLabel,
             String dstLabel,
-            long chunkSize,
             long srcChunkSize,
+            long chunkSize,
             long dstChunkSize,
             boolean directed,
             String prefix,
             List<AdjacentList> adjacentListsAsList,
             List<PropertyGroup> propertyGroupsAsList,
             String version) {
-        this.edgeTriple = new EdgeTriple(srcLabel, edgeLabel, dstLabel);
+        this.edgeTriplet = new EdgeTriplet(srcLabel, edgeLabel, dstLabel);
         this.chunkSize = chunkSize;
         this.srcChunkSize = srcChunkSize;
         this.dstChunkSize = dstChunkSize;
@@ -64,12 +70,14 @@ public class EdgeInfo {
         this.prefix = prefix;
         this.adjacentLists =
                 adjacentListsAsList.stream()
-                        .collect(Collectors.toMap(AdjacentList::getType, Function.identity()));
+                        .collect(
+                                Collectors.toUnmodifiableMap(
+                                        AdjacentList::getType, Function.identity()));
         this.propertyGroups = new PropertyGroups(propertyGroupsAsList);
         this.version = version;
     }
 
-    EdgeInfo(EdgeYamlParser yamlParser) {
+    private EdgeInfo(EdgeYamlParser yamlParser) {
         this(
                 yamlParser.getSrc_label(),
                 yamlParser.getEdge_label(),
@@ -81,15 +89,15 @@ public class EdgeInfo {
                 yamlParser.getPrefix(),
                 yamlParser.getAdjacent_lists().stream()
                         .map(AdjacentList::new)
-                        .collect(Collectors.toList()),
+                        .collect(Collectors.toUnmodifiableList()),
                 yamlParser.getProperty_groups().stream()
                         .map(PropertyGroup::new)
-                        .collect(Collectors.toList()),
+                        .collect(Collectors.toUnmodifiableList()),
                 yamlParser.getVersion());
     }
 
     private EdgeInfo(
-            EdgeTriple edgeTriple,
+            EdgeTriplet edgeTriplet,
             long chunkSize,
             long srcChunkSize,
             long dstChunkSize,
@@ -98,7 +106,7 @@ public class EdgeInfo {
             Map<AdjListType, AdjacentList> adjacentLists,
             PropertyGroups propertyGroups,
             String version) {
-        this.edgeTriple = edgeTriple;
+        this.edgeTriplet = edgeTriplet;
         this.chunkSize = chunkSize;
         this.srcChunkSize = srcChunkSize;
         this.dstChunkSize = dstChunkSize;
@@ -122,35 +130,48 @@ public class EdgeInfo {
         return new EdgeInfo(edgeInfoYaml);
     }
 
-    public EdgeInfo addAdjacentList(AdjacentList adjacentList) {
-        Map<AdjListType, AdjacentList> newAdjacentLists = new HashMap<>(adjacentLists);
-        newAdjacentLists.put(adjacentList.getType(), adjacentList);
-        return new EdgeInfo(
-                edgeTriple,
-                chunkSize,
-                srcChunkSize,
-                dstChunkSize,
-                directed,
-                prefix,
-                newAdjacentLists,
-                propertyGroups,
-                version);
+    public Optional<EdgeInfo> addAdjacentListAsNew(AdjacentList adjacentList) {
+        if (adjacentList == null || adjacentLists.containsKey(adjacentList.getType())) {
+            return Optional.empty();
+        }
+        Map<AdjListType, AdjacentList> newAdjacentLists =
+                Stream.concat(
+                                adjacentLists.entrySet().stream(),
+                                Map.of(adjacentList.getType(), adjacentList).entrySet().stream())
+                        .collect(
+                                Collectors.toUnmodifiableMap(
+                                        Map.Entry::getKey, Map.Entry::getValue));
+        return Optional.of(
+                new EdgeInfo(
+                        edgeTriplet,
+                        chunkSize,
+                        srcChunkSize,
+                        dstChunkSize,
+                        directed,
+                        prefix,
+                        newAdjacentLists,
+                        propertyGroups,
+                        version));
     }
 
-    public EdgeInfo addPropertyGroup(PropertyGroup propertyGroup) {
-        return new EdgeInfo(
-                edgeTriple,
-                chunkSize,
-                srcChunkSize,
-                dstChunkSize,
-                directed,
-                prefix,
-                adjacentLists,
-                propertyGroups.addPropertyGroup(propertyGroup),
-                version);
+    public Optional<EdgeInfo> addPropertyGroupAsNew(PropertyGroup propertyGroup) {
+        return propertyGroups
+                .addPropertyGroupAsNew(propertyGroup)
+                .map(
+                        newPropertyGroups ->
+                                new EdgeInfo(
+                                        edgeTriplet,
+                                        chunkSize,
+                                        srcChunkSize,
+                                        dstChunkSize,
+                                        directed,
+                                        prefix,
+                                        adjacentLists,
+                                        newPropertyGroups,
+                                        version));
     }
 
-    public boolean hasAdjacentListType(AdjListType adjListType) {
+    public boolean hasAdjListType(AdjListType adjListType) {
         return adjacentLists.containsKey(adjListType);
     }
 
@@ -163,6 +184,7 @@ public class EdgeInfo {
     }
 
     public AdjacentList getAdjacentList(AdjListType adjListType) {
+        checkAdjListTypeExist(adjListType);
         return adjacentLists.get(adjListType);
     }
 
@@ -267,16 +289,20 @@ public class EdgeInfo {
     //
     //    }
 
+    public String getConcat() {
+        return edgeTriplet.getConcat();
+    }
+
     public String getSrcLabel() {
-        return edgeTriple.getSrcLabel();
+        return edgeTriplet.getSrcLabel();
     }
 
     public String getEdgeLabel() {
-        return edgeTriple.getEdgeLabel();
+        return edgeTriplet.getEdgeLabel();
     }
 
     public String getDstLabel() {
-        return edgeTriple.getDstLabel();
+        return edgeTriplet.getDstLabel();
     }
 
     public long getChunkSize() {
@@ -304,10 +330,57 @@ public class EdgeInfo {
     }
 
     public List<PropertyGroup> getPropertyGroups() {
-        return propertyGroups.toList();
+        return propertyGroups.getPropertyGroupList();
     }
 
     public String getVersion() {
         return version;
+    }
+
+    private void checkAdjListTypeExist(AdjListType adjListType) {
+        if (!adjacentLists.containsKey(adjListType)) {
+            throw new IllegalArgumentException(
+                    "The adjacency list type "
+                            + adjListType
+                            + " does not exist in the edge info "
+                            + this.edgeTriplet.getConcat());
+        }
+    }
+
+    private static class EdgeTriplet {
+        private final String srcLabel;
+        private final String edgeLabel;
+        private final String dstLabel;
+
+        public EdgeTriplet(String srcLabel, String edgeLabel, String dstLabel) {
+            this.srcLabel = srcLabel;
+            this.edgeLabel = edgeLabel;
+            this.dstLabel = dstLabel;
+        }
+
+        public String getConcat() {
+            return srcLabel
+                    + GeneralParams.regularSeparator
+                    + edgeLabel
+                    + GeneralParams.regularSeparator
+                    + dstLabel;
+        }
+
+        @Override
+        public String toString() {
+            return getConcat();
+        }
+
+        public String getSrcLabel() {
+            return srcLabel;
+        }
+
+        public String getEdgeLabel() {
+            return edgeLabel;
+        }
+
+        public String getDstLabel() {
+            return dstLabel;
+        }
     }
 }
