@@ -5,8 +5,8 @@ sidebar_position: 1
 
 ## Property Graph
 
-GraphAr is designed for representing and storing the property graphs. Graph (in discrete mathematics) is a structure made of vertices and edges. 
-Property graph is then a type of graph model where the vertices/edges could carry a name (also called as type or label) and some properties. 
+GraphAr is designed for representing and storing the property graphs. Graph (in discrete mathematics) is a structure made of vertices and edges.
+Property graph is then a type of graph model where the vertices/edges could carry a name (also called as type or label) and some properties.
 Since carrying additional information than non-property graphs, the property graph is able to represent
 connections among data scattered across diverse data databases and with different schemas.
 Compared with the relational database schema, the property graph excels at showing data dependencies.
@@ -16,7 +16,7 @@ network routing, scientific computing and so on.
 A property graph consists of vertices and edges, with each vertex contains a unique identifier and:
 
 - A text label that describes the vertex type.
-- A collection of properties, with each property can be represented by a key-value pair. 
+- A collection of properties, with each property can be represented by a key-value pair.
 
 Each edge contains a unique identifier and:
 
@@ -33,7 +33,7 @@ The following is an example property graph containing two types of vertices ("pe
 
 GraphAr support a set of built-in property data types that are common in real use cases and supported by most file types (CSV, ORC, Parquet), includes:
 
-- **Boolean** 
+- **Boolean**
 - **Int32**: Integer with 32 bits
 - **Int64**: Integer with 64 bits
 - **Float**: 32-bit floating point values
@@ -45,7 +45,7 @@ GraphAr support a set of built-in property data types that are common in real us
 - **List**: A list of values of the same type
 
 GraphAr also supports the user-defined data types, which can be used to represent complex data structures,
-such as the struct, map, and union types. 
+such as the struct, map, and union types.
 
 ## Configurations
 
@@ -85,10 +85,9 @@ Adjacency list is a data structure used to represent the edges of a graph. Graph
 - **unordered_by_source**: the internal id of the source vertex is used as the partition key to divide the edges into different sub-logical-tables, and the edges in each sub-logical-table are unordered, which can be seen as the COO format.
 - **unordered_by_dest**: the internal id of the destination vertex is used as the partition key to divide the edges into different sub-logical-tables, and the edges in each sub-logical-table are unordered, which can also be seen as the COO format.
 
-
 ## Vertex Chunks in GraphAr
 
-### Logical table of vertices 
+### Logical table of vertices
 
 Each type of vertices (with the same label) constructs a logical vertex table, with each vertex assigned with a global index inside this type (called internal vertex id) starting from 0, corresponding to the row number of the vertex in the logical vertex table. An example layout for a logical table of vertices under the label "person" is provided for reference.
 
@@ -102,7 +101,7 @@ In the logical vertex table, some property can be marked as the primary key, suc
 
 :::
 
-### Physical table of vertices 
+### Physical table of vertices
 
 The logical vertex table will be partitioned into multiple continuous vertex chunks for enhancing the reading/writing efficiency. To maintain the ability of random access, the size of vertex chunks for the same label is fixed. To support to access required properties avoiding reading all properties from the files, and to add properties for vertices without modifying the existing files, the columns of the logical table will be divided into several column groups.
 
@@ -116,7 +115,7 @@ For efficiently utilize the filter push-down of the payload file format like Par
 
 :::
 
-## Edge Chunks in GraphAr 
+## Edge Chunks in GraphAr
 
 ### Logical table of edges
 
@@ -187,11 +186,11 @@ See also [Gar Information Files](https://graphar.apache.org/docs/libraries/cpp/g
 As previously mentioned, each logical vertex/edge table is divided into multiple physical tables stored in one of the following file formats:
 
 - [Apache ORC](https://orc.apache.org/)
-- [Apache Parquet](https://parquet.apache.org/) 
+- [Apache Parquet](https://parquet.apache.org/)
 - CSV
 - JSON
 
-Both of Apache ORC and Apache Parquet are column-oriented data storage formats. In practice of graph processing, it is common to only query a subset of columns of the properties. Thus, the column-oriented formats are more efficient, which eliminate the need to read columns that are not relevant. They are also used by a large number of data processing frameworks like [Apache Spark](https://spark.apache.org/), [Apache Hive](https://hive.apache.org/), [Apache Flink](https://flink.apache.org/), and [Apache Hadoop](https://hadoop.apache.org/). 
+Both of Apache ORC and Apache Parquet are column-oriented data storage formats. In practice of graph processing, it is common to only query a subset of columns of the properties. Thus, the column-oriented formats are more efficient, which eliminate the need to read columns that are not relevant. They are also used by a large number of data processing frameworks like [Apache Spark](https://spark.apache.org/), [Apache Hive](https://hive.apache.org/), [Apache Flink](https://flink.apache.org/), and [Apache Hadoop](https://hadoop.apache.org/).
 
 See also [GraphAr Data Files](https://graphar.apache.org/docs/libraries/cpp/getting-started#gar-data-files) for an example.
 

@@ -4,9 +4,9 @@ title: Motivation
 sidebar_position: 2
 ---
 
-Numerous graph systems, 
-such as Neo4j, Nebula Graph, and Apache HugeGraph, have been developed in recent years. 
-Each of these systems has its own graph data storage format, complicating the exchange of graph data between different systems. 
+Numerous graph systems,
+such as Neo4j, Nebula Graph, and Apache HugeGraph, have been developed in recent years.
+Each of these systems has its own graph data storage format, complicating the exchange of graph data between different systems.
 The need for a standard data file format for large-scale graph data storage and processing that can be used by diverse existing systems is evident, as it would reduce overhead when various systems work together.
 
 Our aim is to fill this gap and contribute to the open-source community by providing a standard data file format for graph data storage and exchange, as well as for out-of-core querying.

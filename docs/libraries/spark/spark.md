@@ -25,7 +25,6 @@ The GraphAr Spark library can be used in a range of scenarios:
 
 For more information on its usage, please refer to the [Examples](examples.md).
 
-
 ## Get GraphAr Spark Library
 
 ### Building from source
@@ -52,7 +51,6 @@ After compilation, a similar file *graphar-x.x.x-SNAPSHOT-shaded.jar* is generat
 
 Please refer to the [building steps](https://github.com/apache/incubator-graphar/tree/main/spark) for more details.
 
-
 ## How to Use
 
 ### Information classes
@@ -74,7 +72,6 @@ val version = graph_info.getVersion
 ```
 
 See [TestGraphInfo.scala][test-graph-info] for the complete example.
-
 
 ### IndexGenerator
 
@@ -105,7 +102,6 @@ val edge_df_src_dst_index = IndexGenerator.generateDstIndexForEdgesFromMapping(e
 ```
 
 See [TestIndexGenerator.scala][test-index-generator] for the complete example.
-
 
 ### Writer
 
@@ -145,7 +141,6 @@ writer.writeEdges()
 
 See [TestWriter.scala][test-writer] for the complete example.
 
-
 ### Reader
 
 The GraphAr Spark reader provides an extensive set of interfaces to read GraphAr format files. It reads a collection of vertices or edges at a time and assembles the result into the Spark DataFrame. Similar with the reader in C++ library, it supports the users to specify the data they need, e.g., a single property group.
@@ -181,7 +176,6 @@ val edge_df = reader.readEdges()
 
 See [TestReader.scala][test-reader] for the complete example.
 
-
 ### Graph-level APIs
 
 To improve the usability of the GraphAr Spark library, a set of APIs are provided to allow users to easily perform operations such as reading, writing, and transforming data at the graph level. These APIs are fairly easy to use, while the previous methods of using reader, writer and information classes are more flexibly and can be highly customized.
@@ -210,8 +204,9 @@ The Graph Transformer can be used for various purposes, including transforming G
 :::note
 
 There are certain limitations while using the Graph Transformer:
-  -  The vertices (or edges) of the source and destination graphs are aligned by labels, meaning each vertex/edge label included in the destination graph must have an equivalent in the source graph, in order for the related chunks to be loaded as the data source.
-  -  For each group of vertices/edges (i.e., each single label), each property included in the destination graph (defined in the relevant VertexInfo/EdgeInfo) must also be present in the source graph.
+
+- The vertices (or edges) of the source and destination graphs are aligned by labels, meaning each vertex/edge label included in the destination graph must have an equivalent in the source graph, in order for the related chunks to be loaded as the data source.
+- For each group of vertices/edges (i.e., each single label), each property included in the destination graph (defined in the relevant VertexInfo/EdgeInfo) must also be present in the source graph.
 
   In addition, users can use the GraphAr Spark Reader/Writer to conduct data transformation more flexibly at the vertex/edge table level, as opposed to the graph level. This allows for a more granular approach to transforming data, as [TransformExample.scala][transform-example] shows.
 
@@ -224,7 +219,6 @@ For more information on usage, please refer to the examples:
 - [ComputeExample.scala][compute-example]  includes an example for constructing the GraphX graph from GraphAr format files and executing a connected-components computation.
 - [TransformExample.scala][transform-example] shows an example for graph data conversion between different file types or different adjList types.
 - [Neo4j2GraphAr.scala][neo4j2graphar] and [GraphAr2Neo4j.scala][graphar2neo4j] are examples to conduct data importing/exporting for Neo4j.
-
 
 [test-graph-info]: https://github.com/apache/incubator-graphar/blob/main/maven-projects/spark/graphar/src/test/scala/org/apache/graphar/TestGraphInfo.scala
 [test-index-generator]: https://github.com/apache/incubator-graphar/blob/main/maven-projects/spark/graphar/src/test/scala/org/apache/graphar/TestIndexGenerator.scala

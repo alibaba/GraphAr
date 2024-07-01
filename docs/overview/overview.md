@@ -13,4 +13,5 @@ It is intended to serve as the standard file format for importing/exporting and 
 Additionally, it can also serve as the direct data source for graph processing applications.
 
 ### [Motivation](/docs/overview/motivation)
+
 ### [Concepts](/docs/overview/concepts)

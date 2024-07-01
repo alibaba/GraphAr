@@ -202,7 +202,7 @@ the above graph and outputs the end vertices for each edge.
 
 ``` C++
 graph_info = ...
-auto expect = graphar::EdgesCollection::Make(graph_info, "person", "konws", "person", graphar::AdjListType::ordered_by_source);
+auto expect = graphar::EdgesCollection::Make(graph_info, "person", "knows", "person", graphar::AdjListType::ordered_by_source);
 auto edges = expect.value();
 
 for (auto it = edges->begin(); it != edges->end(); ++it) {

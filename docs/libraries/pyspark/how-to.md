@@ -30,7 +30,7 @@ spark = (
 ## GraphAr PySpark initialize
 
 PySpark bindings are heavily relying on JVM-calls via ``py4j``. To
-initiate all the neccessary things for it just call
+initiate all the necessary things for it just call
 ``graphar_pyspark.initialize()``:
 
 ```python
@@ -53,15 +53,14 @@ from graphar_pyspark.enums import GarType, FileType
 
 Main objects of GraphAr are the following:
 
--  GraphInfo
--  VertexInfo
--  EdgeInfo
+- GraphInfo
+- VertexInfo
+- EdgeInfo
 
 You can check [Scala library documentation](../spark/spark.md)
 for the more detailed information.
 
-
-##  Creating objects in graphar_pyspark
+## Creating objects in graphar_pyspark
 
 GraphAr PySpark package provide two main ways how to initiate
 objects, like ``GraphInfo``:
@@ -70,7 +69,6 @@ objects, like ``GraphInfo``:
    python-arguments
 - ``from_scala(jvm_ref)`` when you create an object from the
    corresponded JVM-object (``py4j.java_gateway.JavaObject``)
-
 
 ```python
 help(Property.from_python)
@@ -95,7 +93,7 @@ print(type(python_property))
 
 You can always get a reference to the corresponding JVM object. For
 example, if you want to use it in your own code and need a direct link
-to the underlaying instance of Scala Class, you can just call
+to the underlying instance of Scala Class, you can just call
 ``to_scala()`` method:
 
 ```python
@@ -128,9 +126,9 @@ Each public property and method of the Scala API is provided in
 python, but in a pythonic-naming convention. For example, in Scala,
 ``Property`` has the following fields:
 
--  name
--  data_type
--  is_primary
+- name
+- data_type
+- is_primary
 
 For each of such a field in Scala API there is a getter and setter
 methods. You can call them from the Python too:
@@ -142,7 +140,7 @@ python_property.get_name()
 ```
 
 You can also modify fields, but be careful: when you modify field of
-instance of the Python class, you modify the underlaying Scala Object
+instance of the Python class, you modify the underlying Scala Object
 at the same moment!
 
 ```python
@@ -167,7 +165,6 @@ modern_graph = GraphInfo.load_graph_info("../../testing/modern_graph/modern_grap
 
 After that you can work with such an objects like regular python
 objects:
-
 
 ```python
 print(modern_graph_v_person.dump())
@@ -195,7 +192,7 @@ label: person
 version: gar/v1
 "      
 ```
-            
+
 ```python
 print(modern_graph_v_person.contain_property("id") is True)
 print(modern_graph_v_person.contain_property("bad_id?") is False)
@@ -203,6 +200,6 @@ print(modern_graph_v_person.contain_property("bad_id?") is False)
 True
 True
 ```
-            
+
 Please, refer to Scala API and examples of GraphAr Spark Scala
 library to see detailed and business-case oriented examples!

@@ -89,7 +89,6 @@ neighbors. Please refer to
 [cc_push_example.cc](https://github.com/apache/incubator-graphar/blob/main/cpp/examples/cc_push_example.cc)
 for the complete code.
 
-
 :::tip
 
 In this example, two kinds of edges are used. The

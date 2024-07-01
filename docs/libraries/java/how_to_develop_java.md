@@ -10,7 +10,7 @@ GraphAr Java library based on GraphAr C++ library and an efficient FFI
 for Java and C++ called
 [FastFFI](https://github.com/alibaba/fastFFI).
 
-### Source Code Level 
+### Source Code Level
 
 - Interface
 - Class
@@ -80,8 +80,8 @@ Please refer to
 ## How To Test
 
 ```bash
-$ export GAR_TEST_DATA=$PWD/../../testing/
-$ mvn clean test
+export GAR_TEST_DATA=$PWD/../../testing/
+mvn clean test
 ```
 
 This will build GraphAr C++ library internally for Java. If you already
@@ -96,11 +96,11 @@ To ensure CI for checking code style will pass, please ensure check
 below is success:
 
 ```bash
-$ mvn spotless:check
+mvn spotless:check
 ```
 
 If there are violations, running command below to automatically format:
 
 ```bash
-$ mvn spotless:apply
+mvn spotless:apply
 ```

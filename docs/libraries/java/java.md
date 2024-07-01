@@ -11,19 +11,19 @@ Based on an efficient FFI for Java and C++ called
 library allows users to write Java for generating, loading and
 transforming GraphAr format files. It consists of several components:
 
--  **Information Classes**: As same with in the C++ library, the
+- **Information Classes**: As same with in the C++ library, the
    information classes are implemented to construct and access the meta
    information about the **graphs**, **vertices** and **edges** in
    GraphAr.
 
--  **Writers**: The GraphAr Java writer provides a set of interfaces
+- **Writers**: The GraphAr Java writer provides a set of interfaces
    that can be used to write Apache Arrow VectorSchemaRoot into GraphAr format
    files. Every time it takes a VectorSchemaRoot as the logical table
    for a type of vertices or edges, then convert it to ArrowTable, and
    then dumps it to standard GraphAr format files (CSV, ORC or Parquet files) under
    the specific directory path.
 
--  **Readers**: The GraphAr Java reader provides a set of interfaces
+- **Readers**: The GraphAr Java reader provides a set of interfaces
    that can be used to read GraphAr format files. It reads a collection of vertices
    or edges at a time and assembles the result into the ArrowTable.
    Similar with the reader in the C++ library, it supports the users to
@@ -41,48 +41,47 @@ Firstly, install llvm-11. `LLVM11_HOME` should point to the home of
 LLVM 11. In Ubuntu, it is at `/usr/lib/llvm-11`. Basically, the build
 procedure the following binary:
 
--  `$LLVM11_HOME/bin/clang++`
--  `$LLVM11_HOME/bin/ld.lld`
--  `$LLVM11_HOME/lib/cmake/llvm`
+- `$LLVM11_HOME/bin/clang++`
+- `$LLVM11_HOME/bin/ld.lld`
+- `$LLVM11_HOME/lib/cmake/llvm`
 
 Tips:
 
--  Use Ubuntu as example:
+- Use Ubuntu as example:
 
 ```bash
-$ sudo apt-get install llvm-11 clang-11 lld-11 libclang-11-dev libz-dev -y
-$ export LLVM11_HOME=/usr/lib/llvm-11
+sudo apt-get install llvm-11 clang-11 lld-11 libclang-11-dev libz-dev -y
+export LLVM11_HOME=/usr/lib/llvm-11
 ```
 
--  Or compile from source with this [script](https://github.com/alibaba/fastFFI/blob/main/docker/install-llvm11.sh):
+- Or compile from source with this [script](https://github.com/alibaba/fastFFI/blob/main/docker/install-llvm11.sh):
 
 ```bash
-$ export LLVM11_HOME=/usr/lib/llvm-11
-$ export LLVM_VAR=11.0.0
-$ sudo ./install-llvm11.sh
+export LLVM11_HOME=/usr/lib/llvm-11
+export LLVM_VAR=11.0.0
+sudo ./install-llvm11.sh
 ```
 
 Make the graphar-java-library directory as the current working
 directory:
 
 ```bash
-$ git clone https://github.com/apache/incubator-graphar.git
-$ cd incubator-graphar
-$ git submodule update --init
-$ cd maven-projects/java
+git clone https://github.com/apache/incubator-graphar.git
+cd incubator-graphar
+git submodule update --init
+cd maven-projects/java
 ```
 
 Compile package:
 
 ```bash
-$ mvn clean install -DskipTests
+mvn clean install -DskipTests
 ```
 
 This will build GraphAr C++ library internally for Java. If you already installed GraphAr C++ library in your system,
 you can append this option to skip: `-DbuildGarCPP=OFF`.
 
 Then set GraphAr as a dependency in maven project:
-
 
 ```xml
 <dependencies>

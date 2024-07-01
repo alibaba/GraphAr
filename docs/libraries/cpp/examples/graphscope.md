@@ -30,7 +30,7 @@ The time performance of *ArrowFragmentBuilder* and *ArrowFragmentWriter*
 in GraphScope is heavily dependent on the partitioning of the graph into
 GraphAr format files, that is, the *vertex chunk size* and *edge chunk size*, which
 are specified in the vertex information file and in the edge information
-file, respectively. 
+file, respectively.
 
 Generally speaking, fewer chunks are created if the file size is large.
 On small graphs, this can be disadvantageous as it reduces the degree of

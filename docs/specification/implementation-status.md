@@ -60,14 +60,12 @@ Supported compression methods for the file formats:
 
 :::
 
-
 ## Property
 
 | Property feature  | C++   | Java  | Scala |   Python   |
 |-------------------|-------|-------|-------|------------|
 | primary key       | ✓     | ✓     | ✓     | ✓          |
 | nullable          | ✓     |       | ✓     | ✓          |
-
 
 Supported operations in Property:
 
@@ -78,20 +76,18 @@ Supported operations in Property:
 | is_primary_key    | ✓     | ✓ (1) | ✓     | ✓ (2)      |
 | is_nullable       | ✓     |       | ✓     | ✓ (2)      |
 
-
 ## Property Group
 
 | Property Group (operation) | C++   |Java (1)| Scala |  Python (2)|
 |-------------------|-------|--------|-------|------------|
 | create            | ✓     | ✓      | ✓     | ✓          |
-| add property      | ✓     | ✓      | ✓     | ✓          | 
+| add property      | ✓     | ✓      | ✓     | ✓          |
 | remove property   |       |        |       |            |
 | get properties    | ✓     | ✓      | ✓     | ✓          |
 | check property    | ✓     | ✓      |       |            |
 | get file type     | ✓     | ✓      | ✓     | ✓          |
 | get path prefix   | ✓     | ✓      | ✓     | ✓          |
 | check validation  | ✓     |        |       |            |
-
 
 ## Adjacency List
 
@@ -111,7 +107,6 @@ Supported operations in Adjacency List:
 | get path prefix   | ✓     |        | ✓     | ✓          |
 | check validation  | ✓     |        |       |            |
 
-
 ## Vertex
 
 Vertex features:
@@ -125,8 +120,8 @@ Vertex features:
 
 :::note
 
-* *label* is the vertex label, which is a unique identifier for the vertex.
-* *tag* is the vertex tag, which is tag or category for the vertex.
+- *label* is the vertex label, which is a unique identifier for the vertex.
+- *tag* is the vertex tag, which is tag or category for the vertex.
 
 :::
 
@@ -145,7 +140,6 @@ Supported operations in Vertex Info:
 | check validation  | ✓     |        | ✓     | ✓          |
 | serialize         | ✓     | ✓      | ✓     | ✓          |
 | deserialize       | ✓     | ✓      | ✓     | ✓          |
-
 
 ## Edge
 
@@ -190,11 +184,10 @@ Supported operations in Edge Info:
 
 :::
 
-
 ## Graph
 
 | Graph             | C++   | Java  | Scala |   Python   |
-|-------------------|-------|-------|-------|------------| 
+|-------------------|-------|-------|-------|------------|
 | labeled vertex (with property)    | ✓     | ✓     | ✓     | ✓          |
 | labeled edge (with property)     | ✓     | ✓     | ✓     | ✓          |
 | extra info        | ✓     |       |       |            |
@@ -225,7 +218,6 @@ Supported operations in Graph Info:
 - \(2) Through py4j bindings to the GraphAr Spark library.
 
 :::
-
 
 ## Libraries Version Compatibility
 

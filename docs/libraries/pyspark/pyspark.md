@@ -65,7 +65,6 @@ GraphAr PySpark uses poetry as a build system. Please refer to
 to find the manual how to install this tool. Currently GraphAr PySpark
 is build with Python 3.9 and PySpark 3.2
 
-
 Make the graphar-pyspark-library directory as the current working
 directory:
 
@@ -74,7 +73,6 @@ cd incubator-graphar/pyspark
 ```
 
 Build package:
-
 
 ```bash
 poetry build
@@ -87,7 +85,6 @@ generated in the directory *pyspark/dist/*.
 
 You cannot install graphar-pyspark from PyPi for now.
 
-
 ## How to Use
 
 ### Initialization
@@ -96,7 +93,6 @@ GraphAr PySpark is not a standalone library but bindings to GraphAr
 Scala. You need to have *spark-x.x.x.jar* in your *spark-jars*.
 Please refer to [GraphAr scala documentation](../spark/spark.md) to get
 this JAR.
-
 
 ```python
 // create a SparkSession from pyspark.sql import SparkSession

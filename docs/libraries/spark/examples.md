@@ -11,7 +11,6 @@ sidebar_position: 1
 
 Examples of this co-working integration have been provided as showcases.
 
-
 ### Examples
 
 ### Transform GraphAr format files
@@ -24,7 +23,6 @@ the original data is first loaded into a Spark DataFrame using the GraphAr Spark
 Then, the DataFrame is written into generated GraphAr format files through a GraphAr Spark Writer,
 following the meta data defined in a new information file.
 
-
 ### Compute with GraphX
 
 Another important use case of GraphAr is to use it as a data source for graph
@@ -32,7 +30,6 @@ computing or analytics; [ComputeExample.scala][compute-example] provides an exam
 a GraphX graph from reading GraphAr format files and executing a connected-components computation.
 Also, executing queries with Spark SQL and running other graph analytic algorithms
 can be implemented in a similar fashion.
-
 
 ### Import/Export graphs of Neo4j
 

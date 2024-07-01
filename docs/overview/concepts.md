@@ -11,12 +11,12 @@ Glossary of relevant concepts and terms.
   group is the unit of storage and is stored in a separate directory.
 
 - **Adjacency List**: The storage method to store the edges of certain vertex type. Which include:
-    - *ordered by source vertex id*: the edges are ordered and aligned by the source vertex
-    - *ordered by destination vertex id*: the edges are ordered and aligned by the destination vertex
-    - *unordered by source vertex id*: the edges are unordered but aligned by the source vertex
-    - *unordered by destination vertex id*: the edges are unordered but aligned by the destination vertex
+  - *ordered by source vertex id*: the edges are ordered and aligned by the source vertex
+  - *ordered by destination vertex id*: the edges are ordered and aligned by the destination vertex
+  - *unordered by source vertex id*: the edges are unordered but aligned by the source vertex
+  - *unordered by destination vertex id*: the edges are unordered but aligned by the destination vertex
 
-- **Compressed Sparse Row (CSR)**: The storage layout the edges of certain vertex type. Corresponding to the 
+- **Compressed Sparse Row (CSR)**: The storage layout the edges of certain vertex type. Corresponding to the
   ordered by source vertex id adjacency list, the edges are stored in a single array and the offsets of the
   edges of each vertex are stored in a separate array.
 
@@ -29,7 +29,7 @@ Glossary of relevant concepts and terms.
   no offsets are stored.
 
 - **Vertex Chunk**: The storage unit of vertex. Each vertex chunk contains a fixed number of vertices and is stored
-  in a separate file. 
+  in a separate file.
 
 - **Edge Chunk**: The storage unit of edge. Each edge chunk contains a fixed number of edges and is stored in a separate file.
 
