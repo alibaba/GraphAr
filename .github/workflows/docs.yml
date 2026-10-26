@@ -47,7 +47,7 @@ jobs:
           submodules: true
           fetch-depth: 0
       
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@eae0cfeb286e66ffb5155f1a79b90583a127a68b # v2.4.1
         with:
           version: 8
 
