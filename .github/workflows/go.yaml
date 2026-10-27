@@ -118,7 +118,9 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "stable"
+          # golangci-lint v1.64.8 cannot decode export data from newer Go
+          # stable releases; keep the lint job on the go.mod floor.
+          go-version: "1.23"
           cache-dependency-path: go/graphar/go.sum
 
       - name: golangci-lint
