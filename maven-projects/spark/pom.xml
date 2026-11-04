@@ -33,7 +33,6 @@
 
     <artifactId>spark</artifactId>
     <packaging>pom</packaging>
-    <version>${graphar.version}</version>
 
     <properties>
         <scala.version>2.12.15</scala.version>

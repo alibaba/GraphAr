@@ -32,7 +32,6 @@
     </parent>
 
     <artifactId>graphar-datasources</artifactId>
-    <version>${graphar.version}</version>
     <packaging>jar</packaging>
 
     <dependencies>

@@ -34,7 +34,6 @@
 
     <artifactId>graphar-info</artifactId>
     <packaging>jar</packaging>
-    <version>${graphar.version}</version>
 
     <name>graphar-info</name>
 
